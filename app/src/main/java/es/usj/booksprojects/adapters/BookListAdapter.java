@@ -22,10 +22,10 @@ public class BookListAdapter extends RecyclerView.Adapter<BookListAdapter.BookVi
     private int resourceId;
     //the Id of the layout we will repeat as many times we have items in the list
 
-    public BookListAdapter( int resourceId){
+    public BookListAdapter( int resourceId, List<Book> books){
         //this.context = context;
+        this.localDataSet = books;
         this.resourceId = resourceId;
-        localDataSet= BookMockData.getMockBooks();
     }
 
     @NonNull
