@@ -14,16 +14,17 @@ public class Book {
         private String title;
         private String externalReference;  // isbn ?
 
-        private List<Integer> genres;
+    private List<Integer> genres;
 
         private int author;
 
+   public Book(int id, String title){
+       this.id = id;
+       this.title = title;
+   }
 
-        public Book(int id, String title) {
-                this.id = id;
-                this.title = title;
-                genres = new ArrayList<>();
-        }
+    public Book() {
+    }
 
         public int getId() {
                 return id;
