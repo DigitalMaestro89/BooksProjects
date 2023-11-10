@@ -38,8 +38,11 @@ public class BookListAdapter extends RecyclerView.Adapter<BookListAdapter.BookVi
 
     @Override
     public void onBindViewHolder(@NonNull BookViewHolder holder, int position) {
-        Book book = localDataSet.get(position);
-        holder.tvBookTitle.setText(book.getTitle().toString());
+
+        if(localDataSet != null && position < localDataSet.size()){
+            Book book = localDataSet.get(position);
+            holder.tvBookTitle.setText(book.getTitle().toString());
+        }
     }
 
     @Override

@@ -7,12 +7,15 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
 
+import java.io.IOException;
 import java.util.List;
 
 import es.usj.booksprojects.R;
 import es.usj.booksprojects.adapters.BookListAdapter;
+import es.usj.booksprojects.data.BookData;
 import es.usj.booksprojects.mocks.BookMockData;
 import es.usj.booksprojects.model.Book;
+import es.usj.booksprojects.serverOperations.GetRequest;
 
 
 public class BookListActivity extends AppCompatActivity {
@@ -24,14 +27,22 @@ public class BookListActivity extends AppCompatActivity {
     private int cardViewId = R.layout.view_book_card;
     private BookListAdapter adapter;
 
+    private GetRequest getRequest = new GetRequest();
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        BookData books = BookData.getInstance();
+        try {
+            books.setBooks(getRequest.retrBooks("judo"));
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_book_list);
 
         List<Book> localDataSet= BookMockData.getMockBooks();
         recyclerView = findViewById(R.id.rvBooks);
-        adapter = new BookListAdapter(cardViewId, localDataSet);
+        adapter = new BookListAdapter(cardViewId, books.getBooks());
         recyclerView.setLayoutManager(new GridLayoutManager(this, 2));
         recyclerView.setAdapter(adapter);
 

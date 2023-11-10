@@ -13,6 +13,14 @@ public final class BookData {
     private static BookData instance;
     private List<Book> books;
 
+    public List<Book> getBooks() {
+        return books;
+    }
+
+    public void setBooks(List<Book> books) {
+        this.books = books;
+    }
+
     private BookData(){
         books = new ArrayList<Book>();
     }

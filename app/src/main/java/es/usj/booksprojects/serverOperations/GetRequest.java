@@ -1,52 +1,36 @@
 package es.usj.booksprojects.serverOperations;
 
-import android.util.Log;
-
-import java.io.BufferedReader;
-import java.io.InputStreamReader;
-import java.net.HttpURLConnection;
-import java.net.URL;
-import java.util.ArrayList;
-import java.util.List;
-
 import com.google.gson.Gson;
-
-import org.apache.http.HttpResponse;
-import org.apache.http.client.HttpClient;
-import org.apache.http.client.methods.HttpGet;
-import org.apache.http.impl.client.HttpClients;
-import org.apache.http.util.EntityUtils;
 
 import es.usj.booksprojects.mapper.BookMapper;
 import es.usj.booksprojects.model.Book;
 import es.usj.booksprojects.serverOperations.valueApi.BookValueApi;
 import es.usj.booksprojects.serverOperations.valueApi.BooksApIResponse;
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.Response;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 public class GetRequest {
     private final String QUERY = "https://openlibrary.org/search.json?q=";
-    private final String COVERQUERY = "https://covers.openlibrary.org";
 
-    public GetRequest() {
-    }
-
-    public List<Book> retrBooks(String searchName) {
+    public List<Book> retrBooks(String searchName) throws IOException {
         String bookQuery = QUERY.concat(searchName);
+        OkHttpClient client = new OkHttpClient();
         List<Book> booksList = new ArrayList<>();
 
-        try {
-            // Créer un client HTTP
-            HttpClient httpClient = HttpClients.createDefault();
+        // Créer une requête GET avec l'URL
+        Request request = new Request.Builder()
+                .url(bookQuery)
+                .build();
 
-            // Créer une requête GET avec l'URL
-            HttpGet request = new HttpGet(bookQuery);
+        // Exécuter la requête de manière synchrone
+        Response response = client.newCall(request).execute();
 
-            // Exécuter la requête et obtenir la réponse
-            HttpResponse response = httpClient.execute(request);
-
-            // Lire la réponse JSON en tant que chaîne
-            String jsonResponse = EntityUtils.toString(response.getEntity());
-
-            // Convertir la réponse JSON en objets Book
+        if (response.isSuccessful()) {
+            String jsonResponse = response.body().string();
             Gson gson = new Gson();
             BooksApIResponse booksResponse = gson.fromJson(jsonResponse, BooksApIResponse.class);
 
@@ -57,10 +41,8 @@ public class GetRequest {
                     booksList.add(book);
                 }
             }
-        } catch (Exception e) {
-            e.printStackTrace();
         }
+
         return booksList;
     }
-
 }
