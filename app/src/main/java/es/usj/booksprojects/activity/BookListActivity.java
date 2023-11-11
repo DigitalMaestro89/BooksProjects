@@ -4,6 +4,7 @@ import android.os.Bundle;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.List;
@@ -29,7 +30,7 @@ public class BookListActivity extends AppCompatActivity {
 
         GetRequest getRequest = new GetRequest();
 
-        getRequest.retrBooks("math", new GetRequest.Callback() {
+        getRequest.retrBooks("maths", new GetRequest.Callback() {
             @Override
             public void onSuccess(List<Book> books) {
                 BookData.getInstance().setBooks(books);
@@ -40,9 +41,9 @@ public class BookListActivity extends AppCompatActivity {
                 adapter = new BookListAdapter(cardViewId, books);
                 recyclerView.setLayoutManager(new GridLayoutManager(BookListActivity.this, 2));
                 recyclerView.setAdapter(adapter);
-                recyclerView2.setLayoutManager(new GridLayoutManager(BookListActivity.this, 2));
+                recyclerView2.setLayoutManager(new LinearLayoutManager(BookListActivity.this, LinearLayoutManager.HORIZONTAL, false));
                 recyclerView2.setAdapter(adapter);
-                recyclerView3.setLayoutManager(new GridLayoutManager(BookListActivity.this, 2));
+                recyclerView3.setLayoutManager(new LinearLayoutManager(BookListActivity.this, LinearLayoutManager.HORIZONTAL, false));
                 recyclerView3.setAdapter(adapter);
             }
 
