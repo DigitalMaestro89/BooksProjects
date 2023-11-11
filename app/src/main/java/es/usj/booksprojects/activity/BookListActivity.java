@@ -1,12 +1,14 @@
 package es.usj.booksprojects.activity;
 
 import android.os.Bundle;
+import android.util.Log;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import es.usj.booksprojects.R;
@@ -31,33 +33,30 @@ public class BookListActivity extends AppCompatActivity {
 
         GetRequest getRequest = new GetRequest();
 
+        recyclerView = findViewById(R.id.rvBooks);
+
         getRequest.retrBooks("maths", new GetRequestCallback() {
             @Override
             public void onSuccess(List<Book> books) {
+                Log.e("Taille books", Integer.toString(books.size()));
+
                 BookData.getInstance().setBooks(books);
 
-                recyclerView = findViewById(R.id.rvBooks);
-                recyclerView2 = findViewById(R.id.rvNewBooks);
-                recyclerView3 = findViewById(R.id.rvYourList);
-
-                adapter = new BookListAdapter(cardViewId, books);
-                recyclerView.setLayoutManager(new GridLayoutManager(BookListActivity.this, 2));
+                // Créez une instance de l'adaptateur pour le premier RecyclerView
+                adapter = new BookListAdapter(cardViewId, new ArrayList<>(books));
+                //adapter.notifyDataSetChanged();
+                // Attachez l'adaptateur au RecyclerView après avoir défini le LayoutManager
+                recyclerView.setLayoutManager(new LinearLayoutManager(BookListActivity.this, LinearLayoutManager.HORIZONTAL, false));
                 recyclerView.setAdapter(adapter);
-
-                // Vous devez créer des adaptateurs distincts pour recyclerView2 et recyclerView3
-                BookListAdapter adapter2 = new BookListAdapter(cardViewId, books);
-                recyclerView2.setLayoutManager(new LinearLayoutManager(BookListActivity.this, LinearLayoutManager.HORIZONTAL, false));
-                recyclerView2.setAdapter(adapter2);
-
-                BookListAdapter adapter3 = new BookListAdapter(cardViewId, books);
-                recyclerView3.setLayoutManager(new LinearLayoutManager(BookListActivity.this, LinearLayoutManager.HORIZONTAL, false));
-                recyclerView3.setAdapter(adapter3);
+                //adapter.notifyDataSetChanged();
             }
 
             @Override
             public void onFailure(Throwable t) {
                 // Gérer l'échec
+                Log.e("Request Failure", t.getMessage());
             }
         });
     }
+
 }

@@ -47,8 +47,9 @@ public class BookListAdapter extends RecyclerView.Adapter<BookListAdapter.BookVi
 
     @Override
     public int getItemCount() {
-        return BookMockData.getMockBooks().size();
+        return localDataSet.size();
     }
+
 
     public class BookViewHolder extends RecyclerView.ViewHolder{
         private TextView tvBookTitle;
