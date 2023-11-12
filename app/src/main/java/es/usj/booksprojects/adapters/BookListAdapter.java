@@ -12,13 +12,12 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.List;
 
 import es.usj.booksprojects.R;
-import es.usj.booksprojects.mocks.BookMockData;
 import es.usj.booksprojects.model.Book;
 
 public class BookListAdapter extends RecyclerView.Adapter<BookListAdapter.BookViewHolder> {
 
-    private List<Book> localDataSet;
-    Context context;
+    private final List<Book> localDataSet;
+    //Context context;
     private int resourceId;
     //the Id of the layout we will repeat as many times we have items in the list
 

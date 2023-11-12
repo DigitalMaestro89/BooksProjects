@@ -20,9 +20,8 @@ import es.usj.booksprojects.serverOperations.callback.GetRequestCallback;
 
 public class BookListActivity extends AppCompatActivity {
 
-    private RecyclerView recyclerView;
-    private RecyclerView recyclerView2;
-    private RecyclerView recyclerView3;
+    private RecyclerView rvYourList;
+    private RecyclerView rvNewBooks;
     private int cardViewId = R.layout.view_book_card;
     private BookListAdapter adapter;
 
@@ -33,7 +32,8 @@ public class BookListActivity extends AppCompatActivity {
 
         GetRequest getRequest = new GetRequest();
 
-        recyclerView = findViewById(R.id.rvBooks);
+        rvYourList = findViewById(R.id.rvYourList);
+        rvNewBooks = findViewById(R.id.rvNewBooks);
 
         getRequest.retrBooks("maths", new GetRequestCallback() {
             @Override
@@ -42,13 +42,11 @@ public class BookListActivity extends AppCompatActivity {
 
                 BookData.getInstance().setBooks(books);
 
-                // Créez une instance de l'adaptateur pour le premier RecyclerView
                 adapter = new BookListAdapter(cardViewId, new ArrayList<>(books));
-                //adapter.notifyDataSetChanged();
-                // Attachez l'adaptateur au RecyclerView après avoir défini le LayoutManager
-                recyclerView.setLayoutManager(new LinearLayoutManager(BookListActivity.this, LinearLayoutManager.HORIZONTAL, false));
-                recyclerView.setAdapter(adapter);
-                //adapter.notifyDataSetChanged();
+                rvNewBooks.setLayoutManager(new LinearLayoutManager(BookListActivity.this, LinearLayoutManager.HORIZONTAL, false));
+                rvNewBooks.setAdapter(adapter);
+                rvYourList.setLayoutManager(new LinearLayoutManager(BookListActivity.this, LinearLayoutManager.HORIZONTAL, false));
+                rvYourList.setAdapter(adapter);
             }
 
             @Override
