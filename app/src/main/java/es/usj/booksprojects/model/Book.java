@@ -65,4 +65,15 @@ public class Book {
         public void setGenres(List<Integer> genres) {
                 this.genres = genres;
         }
+
+    @Override
+    public String toString() {
+        return "Book{" +
+                "id=" + id +
+                ", title='" + title + '\'' +
+                ", externalReference='" + externalReference + '\'' +
+                ", genres=" + genres +
+                ", author=" + author +
+                '}';
+    }
 }

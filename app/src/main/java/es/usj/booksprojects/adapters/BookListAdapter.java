@@ -12,13 +12,12 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.List;
 
 import es.usj.booksprojects.R;
-import es.usj.booksprojects.mocks.BookMockData;
 import es.usj.booksprojects.model.Book;
 
 public class BookListAdapter extends RecyclerView.Adapter<BookListAdapter.BookViewHolder> {
 
-    private List<Book> localDataSet;
-    Context context;
+    private final List<Book> localDataSet;
+    //Context context;
     private int resourceId;
     //the Id of the layout we will repeat as many times we have items in the list
 
@@ -38,14 +37,18 @@ public class BookListAdapter extends RecyclerView.Adapter<BookListAdapter.BookVi
 
     @Override
     public void onBindViewHolder(@NonNull BookViewHolder holder, int position) {
-        Book book = localDataSet.get(position);
-        holder.tvBookTitle.setText(book.getTitle().toString());
+
+        if(localDataSet != null && position < localDataSet.size()){
+            Book book = localDataSet.get(position);
+            holder.tvBookTitle.setText(book.getTitle().toString());
+        }
     }
 
     @Override
     public int getItemCount() {
-        return BookMockData.getMockBooks().size();
+        return localDataSet.size();
     }
+
 
     public class BookViewHolder extends RecyclerView.ViewHolder{
         private TextView tvBookTitle;

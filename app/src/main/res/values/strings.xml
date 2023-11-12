@@ -3,4 +3,7 @@
     <string name="bookflix">Bookflix</string>
     <string name="your_list">Your List</string>
     <string name="new_books">New Books</string>
+    <string name="title">Title</string>
+    <string name="book_s_logo">book\'s Logo</string>
+    <string name="research_logo">research logo</string>
 </resources>
