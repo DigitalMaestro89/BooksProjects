@@ -7,5 +7,7 @@ import retrofit2.http.Query;
 
 public interface BookApiService {
     @GET("search.json")
-    Call<BooksApiResponse> getBooks(@Query("q") String searchName);
+    Call<BooksApiResponse> getBooks(
+            @Query("q") String searchName,
+            @Query("limit") int limit);
 }

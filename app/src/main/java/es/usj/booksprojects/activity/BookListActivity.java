@@ -16,7 +16,7 @@ import es.usj.booksprojects.adapters.BookListAdapter;
 import es.usj.booksprojects.data.BookData;
 import es.usj.booksprojects.model.Book;
 import es.usj.booksprojects.serverOperations.GetRequest;
-import es.usj.booksprojects.serverOperations.callback.GetRequestCallback;
+import es.usj.booksprojects.serverOperations.callback.BookGetRequestCallback;
 
 public class BookListActivity extends AppCompatActivity {
 
@@ -35,7 +35,7 @@ public class BookListActivity extends AppCompatActivity {
         rvYourList = findViewById(R.id.rvYourList);
         rvNewBooks = findViewById(R.id.rvNewBooks);
 
-        getRequest.retrBooks("maths", new GetRequestCallback() {
+        getRequest.retrBooks("maths", new BookGetRequestCallback() {
             @Override
             public void onSuccess(List<Book> books) {
                 Log.e("Taille books", Integer.toString(books.size()));
