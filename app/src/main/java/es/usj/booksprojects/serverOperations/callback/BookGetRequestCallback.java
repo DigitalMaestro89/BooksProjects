@@ -13,7 +13,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public interface GetRequestCallback extends Callback<BooksApiResponse> {
+public interface BookGetRequestCallback extends Callback<BooksApiResponse> {
 
     void onSuccess(List<Book> books);
 
