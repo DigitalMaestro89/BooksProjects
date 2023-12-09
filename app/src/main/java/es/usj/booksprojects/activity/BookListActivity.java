@@ -81,14 +81,13 @@ public class BookListActivity extends AppCompatActivity {
         GetRequest getRequest2 = new GetRequest();
         getRequest2.retrBookImage(bookTest, new ImageBookGetRequestCallback() {
 
+
             @Override
             public void onSuccess() {
                 Log.e("GetImage","onSuccess");
-                // Une fois que l'image est récupérée avec succès, vous pouvez l'afficher dans imageViewTest
                 Bitmap imageBitmap = ImageData.getInstance().getImage(bookTest.getPrincipalIsbn()); // Récupérer l'image associée au principal ISBN
                 if (imageBitmap != null) {
                     runOnUiThread(() -> {
-                        // Mettre à jour l'imageView avec l'image récupérée
                         imageViewTest.setImageBitmap(imageBitmap);
                     });
                 }

@@ -37,7 +37,6 @@ public class GetRequest {
 
     public void retrBookImage(Book book, ImageBookGetRequestCallback callback) {
 
-        Log.d("GetRequest", "retrBookImage() : Début de la méthode");
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl(BASE_URL_COVER)
                 .addConverterFactory(GsonConverterFactory.create())
@@ -50,38 +49,28 @@ public class GetRequest {
             call.enqueue(new Callback<ResponseBody>() {
                 @Override
                 public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-                    Log.d("call",call.request().toString());
-                    Log.d("headers",response.headers().toString());
-                    Log.d("OnResponse", "onResponse() : Succès de la réponse pour ISBN : " + isbn);
-                    //if (response.isSuccessful()) {
-                        //Log.d("GetRequest", "onResponse() : Succès de la réponse pour ISBN : " + isbn);
-                        //Log.d("Headers",response.body().toString());
-                        Log.d("response",Integer.toString(response.code()));
+                    if (response.isSuccessful()) {
                         String contentType = response.headers().get("content-type");
-                        Log.d("contentType Str",contentType);
                         if (contentType != null && contentType.equals("image/jpeg")) {
-                            Log.d("ContentType", "Image() : Succès de la réponse pour ISBN : " + isbn);
-                            Bitmap image = convertResponseBodyToBitmap(response.body());
+                            Bitmap image = GetRequest.convertResponseBodyToBitmap(response.body());
                             ImageData.getInstance().addImage(isbn, image);
                             book.setPrincipalIsbn(isbn);
-
-                           return;
+                            callback.onSuccess(); // Passer les données au callback
+                            return;
                         }
-                    //}
+                    }
                 }
 
                 @Override
                 public void onFailure(Call<ResponseBody> call, Throwable t) {
-                    Log.e("GetRequest", "onFailure() : Échec de la réponse pour ISBN : " + isbn + ", Erreur : " + t.getMessage());
+
                 }
             });
-
-    }
-    // https://openlibrary.org/search.json?q=Harry+Potter&limit=10
+        }
 }
 
 
-    private Bitmap convertResponseBodyToBitmap(ResponseBody responseBody) {
+    public static Bitmap convertResponseBodyToBitmap(ResponseBody responseBody) {
         Bitmap bitmap = null;
         try {
             // Convertir ResponseBody en tableau de bytes
