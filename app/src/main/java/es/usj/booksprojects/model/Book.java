@@ -12,7 +12,7 @@ public class Book {
         private int id;
 
         private String title;
-        private String externalReference;  // isbn ?
+        private List<String> isbnList;
 
     private List<Integer> genres;
 
@@ -30,11 +30,11 @@ public class Book {
                 return id;
         }
 
-        public String getExternalReference() {
-                return externalReference;
-        }
+    public List<String> getIsbnList() {
+        return isbnList;
+    }
 
-        public String getTitle() {
+    public String getTitle() {
                 return title;
         }
 
@@ -54,11 +54,11 @@ public class Book {
                 this.title = title;
         }
 
-        public void setExternalReference(String externalReference) {
-                this.externalReference = externalReference;
-        }
+    public void setIsbnList(List<String> isbnList) {
+        this.isbnList = isbnList;
+    }
 
-        public void setAuthor(int author) {
+    public void setAuthor(int author) {
                 this.author = author;
         }
 
@@ -71,7 +71,6 @@ public class Book {
         return "Book{" +
                 "id=" + id +
                 ", title='" + title + '\'' +
-                ", externalReference='" + externalReference + '\'' +
                 ", genres=" + genres +
                 ", author=" + author +
                 '}';

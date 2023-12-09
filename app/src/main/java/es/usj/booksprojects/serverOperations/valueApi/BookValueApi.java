@@ -23,9 +23,6 @@ public class BookValueApi {
     @JsonProperty("isbn")
     private List<String> isbnList;
 
-    @JsonProperty("language")
-    private List<String> languages;
-
     @JsonProperty("publish_date")
     private List<String> publishDates;
 
@@ -35,8 +32,6 @@ public class BookValueApi {
     @JsonProperty("cover_i")
     private String coverI;
 
-    @JsonProperty("cover_edition_key")
-    private String coverEditionKey;
 
     @Override
     public String toString() {
@@ -46,11 +41,9 @@ public class BookValueApi {
                 ", authorsKeys=" + authorsKeys +
                 ", medianPageNumber='" + medianPageNumber + '\'' +
                 ", isbnList=" + isbnList +
-                ", languages=" + languages +
                 ", publishDates=" + publishDates +
                 ", publishYears=" + publishYears +
                 ", coverI='" + coverI + '\'' +
-                ", coverEditionKey='" + coverEditionKey + '\'' +
                 '}';
     }
 
@@ -74,9 +67,6 @@ public class BookValueApi {
         return isbnList;
     }
 
-    public List<String> getLanguages() {
-        return languages;
-    }
 
     public List<String> getPublishDates() {
         return publishDates;
@@ -90,8 +80,5 @@ public class BookValueApi {
         return coverI;
     }
 
-    public String getCoverEditionKey() {
-        return coverEditionKey;
-    }
 
 }
