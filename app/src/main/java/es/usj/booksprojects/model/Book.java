@@ -12,6 +12,9 @@ public class Book {
         private int id;
 
         private String title;
+
+        private String principalIsbn;
+
         private List<String> isbnList;
 
     private List<Integer> genres;
@@ -38,7 +41,11 @@ public class Book {
                 return title;
         }
 
-        public int getAuthor() {
+    public String getPrincipalIsbn() {
+        return principalIsbn;
+    }
+
+    public int getAuthor() {
                 return author;
         }
 
@@ -62,7 +69,11 @@ public class Book {
                 this.author = author;
         }
 
-        public void setGenres(List<Integer> genres) {
+    public void setPrincipalIsbn(String principalIsbn) {
+        this.principalIsbn = principalIsbn;
+    }
+
+    public void setGenres(List<Integer> genres) {
                 this.genres = genres;
         }
 
@@ -71,6 +82,7 @@ public class Book {
         return "Book{" +
                 "id=" + id +
                 ", title='" + title + '\'' +
+                ", principalIsbn='" + principalIsbn + '\'' +
                 ", genres=" + genres +
                 ", author=" + author +
                 '}';
