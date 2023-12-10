@@ -15,7 +15,7 @@ public class Book {
 
         private String principalIsbn;
 
-        private List<String> isbnList;
+        private List<String> isbnList = new ArrayList<>();
 
     private List<Integer> genres;
 
