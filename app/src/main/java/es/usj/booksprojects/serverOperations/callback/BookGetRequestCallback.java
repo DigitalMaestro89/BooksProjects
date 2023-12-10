@@ -16,7 +16,6 @@ import retrofit2.Response;
 public interface BookGetRequestCallback extends Callback<BooksApiResponse> {
 
     void onSuccess(List<Book> books);
-
     void onFailure(Throwable t);
 
     @Override

@@ -30,7 +30,7 @@ public class GetRequest {
                 .build();
 
         BookApiService apiService = retrofit.create(BookApiService.class);
-        Call<BooksApiResponse> call = apiService.getBooks(searchName,25);
+        Call<BooksApiResponse> call = apiService.getBooks(searchName,2);
 
         call.enqueue(callback);
     }
@@ -73,10 +73,7 @@ public class GetRequest {
     public static Bitmap convertResponseBodyToBitmap(ResponseBody responseBody) {
         Bitmap bitmap = null;
         try {
-            // Convertir ResponseBody en tableau de bytes
             byte[] bytes = responseBody.bytes();
-
-            // Convertir les bytes en Bitmap
             bitmap = BitmapFactory.decodeByteArray(bytes, 0, bytes.length);
         } catch (Exception e) {
             e.printStackTrace();

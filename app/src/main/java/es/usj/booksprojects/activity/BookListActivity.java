@@ -28,24 +28,12 @@ public class BookListActivity extends AppCompatActivity {
     private RecyclerView rvYourList;
     private RecyclerView rvNewBooks;
     private int cardViewId = R.layout.view_book_card;
-
-    private ImageView imageViewTest;
     private BookListAdapter adapter;
 
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-
-        Log.d("BookListActivity", "onCreate() : Avant l'appel à retrBooks()");
-
-        Book bookTest = new Book();
-        List<String> isbnTestList = new ArrayList<>();
-        //isbnTestList.add("sdfgh");
-        isbnTestList.add("9788372780119");
-        //isbnTestList.add("571921");
-        bookTest.setIsbnList(isbnTestList);
-        bookTest.setPrincipalIsbn("9788372780119");
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_book_list);
@@ -75,26 +63,5 @@ public class BookListActivity extends AppCompatActivity {
                 Log.e("Request Failure", t.getMessage());
             }
         });
-
-        imageViewTest = findViewById(R.id.imageViewTest);
-
-        GetRequest getRequest2 = new GetRequest();
-        getRequest2.retrBookImage(bookTest, new ImageBookGetRequestCallback() {
-
-
-            @Override
-            public void onSuccess() {
-                Log.e("GetImage","onSuccess");
-                Bitmap imageBitmap = ImageData.getInstance().getImage(bookTest.getPrincipalIsbn()); // Récupérer l'image associée au principal ISBN
-                if (imageBitmap != null) {
-                    runOnUiThread(() -> {
-                        imageViewTest.setImageBitmap(imageBitmap);
-                    });
-                }
-            }
-
-        });
-
     }
-
 }
