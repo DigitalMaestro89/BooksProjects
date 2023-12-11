@@ -30,7 +30,7 @@ public class GetRequest {
                 .build();
 
         BookApiService apiService = retrofit.create(BookApiService.class);
-        Call<BooksApiResponse> call = apiService.getBooks(searchName,2);
+        Call<BooksApiResponse> call = apiService.getBooks(searchName,5);
 
         call.enqueue(callback);
     }
@@ -44,28 +44,32 @@ public class GetRequest {
 
         BookApiService apiService = retrofit.create(BookApiService.class);
 
-        for (String isbn:book.getIsbnList()) {
-            Call<ResponseBody> call = apiService.getImageBook(isbn);
-            call.enqueue(new Callback<ResponseBody>() {
-                @Override
-                public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-                    if (response.isSuccessful()) {
-                        String contentType = response.headers().get("content-type");
-                        if (contentType != null && contentType.equals("image/jpeg")) {
-                            Bitmap image = GetRequest.convertResponseBodyToBitmap(response.body());
-                            ImageData.getInstance().addImage(isbn, image);
-                            book.setPrincipalIsbn(isbn);
-                            callback.onSuccess(); // Passer les données au callback
-                            return;
+        if(book.getIsbnList()!= null){
+            for (String isbn:book.getIsbnList()) {
+                Call<ResponseBody> call = apiService.getImageBook(isbn);
+                call.enqueue(new Callback<ResponseBody>() {
+                    @Override
+                    public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                        if (response.isSuccessful()) {
+                            String contentType = response.headers().get("content-type");
+                            if(book.getPrincipalIsbn() == null){
+                                if (contentType != null && contentType.equals("image/jpeg")) {
+                                    Bitmap image = GetRequest.convertResponseBodyToBitmap(response.body());
+                                    ImageData.getInstance().addImage(isbn, image);
+                                    book.setPrincipalIsbn(isbn);
+                                    callback.onSuccess(); // Passer les données au callback
+                                    return;
+                                }
+                            }
                         }
                     }
-                }
 
-                @Override
-                public void onFailure(Call<ResponseBody> call, Throwable t) {
+                    @Override
+                    public void onFailure(Call<ResponseBody> call, Throwable t) {
 
-                }
-            });
+                    }
+                });
+            }
         }
 }
 

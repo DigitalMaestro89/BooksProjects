@@ -43,7 +43,7 @@ public class BookListActivity extends AppCompatActivity {
         rvYourList = findViewById(R.id.rvYourList);
         rvNewBooks = findViewById(R.id.rvNewBooks);
 
-        getRequest.retrBooks("maths", new BookGetRequestCallback() {
+        getRequest.retrBooks("Harry Potter", new BookGetRequestCallback() {
             @Override
             public void onSuccess(List<Book> books) {
                 Log.d("BookListActivity", "onSuccess() : Livres récupérés avec succès");
@@ -56,6 +56,26 @@ public class BookListActivity extends AppCompatActivity {
                 rvNewBooks.setAdapter(adapter);
                 rvYourList.setLayoutManager(new LinearLayoutManager(BookListActivity.this, LinearLayoutManager.HORIZONTAL, false));
                 rvYourList.setAdapter(adapter);
+
+                for (Book bookItem:books) {
+                    Log.e("TestBooks",books.toString());
+                    //Log.e("TestBooks",bookItem.getIsbnList().toString());
+                    GetRequest getRequestImage = new GetRequest();
+                    getRequestImage.retrBookImage(bookItem, new ImageBookGetRequestCallback() {
+                        @Override
+                        public void onSuccess() {
+                            Log.e("RetrImage",bookItem.toString());
+                            adapter = new BookListAdapter(cardViewId, new ArrayList<>(books));
+                            rvYourList.setAdapter(adapter);
+                            rvNewBooks.setAdapter(adapter);
+                        }
+
+                        @Override
+                        public void onFailure(Call<ResponseBody> call, Throwable t) {
+                            Log.e("OnFailure",bookItem.toString());
+                        }
+                    });
+                }
             }
 
             @Override

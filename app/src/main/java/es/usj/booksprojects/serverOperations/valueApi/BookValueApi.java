@@ -3,6 +3,7 @@ package es.usj.booksprojects.serverOperations.valueApi;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
@@ -21,7 +22,7 @@ public class BookValueApi {
     private String medianPageNumber;
 
     @JsonProperty("isbn")
-    private List<String> isbnList;
+    private List<String> isbn;
 
     @JsonProperty("publish_date")
     private List<String> publishDates;
@@ -40,7 +41,7 @@ public class BookValueApi {
                 ", authors=" + authors +
                 ", authorsKeys=" + authorsKeys +
                 ", medianPageNumber='" + medianPageNumber + '\'' +
-                ", isbnList=" + isbnList +
+                ", isbnList=" + isbn +
                 ", publishDates=" + publishDates +
                 ", publishYears=" + publishYears +
                 ", coverI='" + coverI + '\'' +
@@ -64,7 +65,7 @@ public class BookValueApi {
     }
 
     public List<String> getIsbnList() {
-        return isbnList;
+        return isbn;
     }
 
 
