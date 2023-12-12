@@ -1,9 +1,6 @@
 package es.usj.booksprojects.serverOperations.callback;
 
 import android.graphics.Bitmap;
-import android.util.Log;
-
-import java.util.List;
 
 import es.usj.booksprojects.data.ImageData;
 import es.usj.booksprojects.model.Book;
@@ -13,16 +10,42 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public interface ImageBookGetRequestCallback extends Callback<ResponseBody> {
+public interface ImageBookGetRequestCallback {
+    void onSuccess(Bitmap image);
+    void onFailure();
 
-    void onSuccess();
+    class ImageResponseHandler implements Callback<ResponseBody> {
 
-    @Override
-    default void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-    }
+        private final ImageBookGetRequestCallback callback;
+        private final Book book;
+        private final String isbn;
 
-    @Override
-    default void onFailure(Call<ResponseBody> call, Throwable t) {
-        Log.e("GetImage","onFailure");
+        public ImageResponseHandler(ImageBookGetRequestCallback callback, Book book, String isbn) {
+            this.callback = callback;
+            this.book = book;
+            this.isbn = isbn;
+        }
+
+        @Override
+        public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+            if (response.isSuccessful()) {
+                String contentType = response.headers().get("content-type");
+                if (book.getPrincipalIsbn() == null) {
+                    if (contentType != null && contentType.equals("image/jpeg")) {
+                        Bitmap image = GetRequest.convertResponseBodyToBitmap(response.body());
+                        ImageData.getInstance().addImage(isbn, image);
+                        book.setPrincipalIsbn(isbn);
+                        callback.onSuccess(image); // Passer les données au callback
+                        return;
+                    }
+                }
+            }
+            callback.onFailure(); // Signaler l'échec au callback
+        }
+
+        @Override
+        public void onFailure(Call<ResponseBody> call, Throwable t) {
+            callback.onFailure(); // Signaler l'échec au callback
+        }
     }
 }

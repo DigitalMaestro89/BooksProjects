@@ -3,25 +3,19 @@ package es.usj.booksprojects.activity;
 import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.util.Log;
-import android.widget.ImageView;
-
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-
 import java.util.ArrayList;
 import java.util.List;
-
 import es.usj.booksprojects.R;
 import es.usj.booksprojects.adapters.BookListAdapter;
 import es.usj.booksprojects.data.BookData;
-import es.usj.booksprojects.data.ImageData;
 import es.usj.booksprojects.model.Book;
 import es.usj.booksprojects.serverOperations.GetRequest;
 import es.usj.booksprojects.serverOperations.callback.BookGetRequestCallback;
 import es.usj.booksprojects.serverOperations.callback.ImageBookGetRequestCallback;
-import okhttp3.ResponseBody;
-import retrofit2.Call;
+
 
 public class BookListActivity extends AppCompatActivity {
 
@@ -59,11 +53,10 @@ public class BookListActivity extends AppCompatActivity {
 
                 for (Book bookItem:books) {
                     Log.e("TestBooks",books.toString());
-                    //Log.e("TestBooks",bookItem.getIsbnList().toString());
                     GetRequest getRequestImage = new GetRequest();
                     getRequestImage.retrBookImage(bookItem, new ImageBookGetRequestCallback() {
                         @Override
-                        public void onSuccess() {
+                        public void onSuccess(Bitmap image) {
                             Log.e("RetrImage",bookItem.toString());
                             adapter = new BookListAdapter(cardViewId, new ArrayList<>(books));
                             rvYourList.setAdapter(adapter);
@@ -71,8 +64,8 @@ public class BookListActivity extends AppCompatActivity {
                         }
 
                         @Override
-                        public void onFailure(Call<ResponseBody> call, Throwable t) {
-                            Log.e("OnFailure",bookItem.toString());
+                        public void onFailure() {
+
                         }
                     });
                 }
