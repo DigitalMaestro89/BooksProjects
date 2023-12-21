@@ -5,29 +5,25 @@ import androidx.annotation.NonNull;
 import java.util.ArrayList;
 import java.util.List;
 
+import es.usj.booksprojects.mapper.AuthorMapper;
 import es.usj.booksprojects.model.Author;
+import es.usj.booksprojects.serverOperations.valueApi.AuthorValueApi;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public interface AuthorGetRequestCallback extends Callback<AuthorsApiResponse> {
+public interface AuthorGetRequestCallback extends Callback<AuthorValueApi> {
 
-    void onSuccess(List<Author> authors);
+    void onSuccess(Author author);
     void onFailure(Throwable t);
 
     @Override
-    default void onResponse(Call<AuthorsApiResponse> call, Response<AuthorsApiResponse> response) {
-        List<String> authorsList = new ArrayList<>();
-        if (response.isSuccessful()) {
-            AuthorsApiResponse authorsResponse = response.body();
-            if (authorsResponse != null && authorsResponse.getAuthors() != null) {
-                /*for (AuthorValueApi authorApi : authorsResponse.getAuthors()) {
-                    Author author = AuthorMapper.toDomainAuthor(authorApi);
-                    authorsList.add(author);
-                }*/
-
-                //authorsList = authorsResponse.getAuthors()
-                // onSuccess(authorsList);
+    default void onResponse(Call<AuthorValueApi> call, Response<AuthorValueApi> response) {
+        if(response.isSuccessful()){
+            AuthorValueApi authorValueApi = response.body();
+            if(authorValueApi != null){
+                Author author = AuthorMapper.toDomainAuthor(authorValueApi);
+                onSuccess(author);
             }
         } else {
             onFailure(new Exception("Request failed: " + response.code()));
@@ -35,7 +31,7 @@ public interface AuthorGetRequestCallback extends Callback<AuthorsApiResponse> {
     }
 
     @Override
-    default void onFailure(@NonNull Call<AuthorsApiResponse> call, Throwable t) {
+    default void onFailure(@NonNull Call<AuthorValueApi> call, Throwable t) {
         onFailure(t);
     }
 }

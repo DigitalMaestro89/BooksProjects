@@ -22,4 +22,35 @@ public class AuthorValueApi {
     @JsonProperty("birth_date")
     private String birth_date;
 
+
+    public String getName() {
+        return name;
+    }
+
+    public String getBio() {
+        return bio;
+    }
+
+    public String getWikipedia() {
+        return wikipedia;
+    }
+
+    public String getWebsite() {
+        return website;
+    }
+
+    public String getBirth_date() {
+        return birth_date;
+    }
+
+    @Override
+    public String toString() {
+        return "AuthorValueApi{" +
+                "name='" + name + '\'' +
+                ", bio='" + bio + '\'' +
+                ", wikipedia='" + wikipedia + '\'' +
+                ", website='" + website + '\'' +
+                ", birth_date='" + birth_date + '\'' +
+                '}';
+    }
 }

@@ -11,8 +11,10 @@ import java.util.List;
 import es.usj.booksprojects.R;
 import es.usj.booksprojects.adapters.BookListAdapter;
 import es.usj.booksprojects.data.BookData;
+import es.usj.booksprojects.model.Author;
 import es.usj.booksprojects.model.Book;
 import es.usj.booksprojects.serverOperations.GetRequest;
+import es.usj.booksprojects.serverOperations.callback.AuthorGetRequestCallback;
 import es.usj.booksprojects.serverOperations.callback.BookGetRequestCallback;
 import es.usj.booksprojects.serverOperations.callback.ImageBookGetRequestCallback;
 
@@ -68,6 +70,20 @@ public class BookListActivity extends AppCompatActivity {
 
                         }
                     });
+
+                    GetRequest getRequestAuthor = new GetRequest();
+                    getRequestAuthor.retrAuthor("OL2622837A", new AuthorGetRequestCallback() {
+                        @Override
+                        public void onSuccess(Author author) {
+                            Log.e("AUTHOR TEST", author.toString());
+                        }
+
+                        @Override
+                        public void onFailure(Throwable t) {
+
+                        }
+                    });
+
                 }
             }
 

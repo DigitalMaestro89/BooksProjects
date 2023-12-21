@@ -1,6 +1,5 @@
 package es.usj.booksprojects.serverOperations.apiService;
 
-import android.graphics.Bitmap;
 
 import es.usj.booksprojects.serverOperations.valueApi.BooksApiResponse;
 import okhttp3.ResponseBody;
