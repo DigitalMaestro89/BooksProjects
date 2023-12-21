@@ -1,20 +1,25 @@
 package es.usj.booksprojects.serverOperations.valueApi;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import java.util.List;
 
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class AuthorValueApi {
-    @JsonProperty("author_name")
-    private List<String> authors;
+    @JsonProperty("name")
+    private String name;
 
-    @Override
-    public String toString() {
-        return "AuthorValueApi{" +
-                "authors=" + authors+
-                '}';
-    }
-    public List<String> getAuthors() {
-        return authors;
-    }
+    @JsonProperty("bio")
+    private String bio;
+
+    @JsonProperty("wikipedia")
+    private String wikipedia;
+
+    @JsonProperty("website")
+    private String website;
+
+    @JsonProperty("birth_date")
+    private String birth_date;
+
 }

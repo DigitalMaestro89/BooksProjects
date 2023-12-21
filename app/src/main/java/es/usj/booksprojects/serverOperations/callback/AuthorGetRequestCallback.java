@@ -5,14 +5,7 @@ import androidx.annotation.NonNull;
 import java.util.ArrayList;
 import java.util.List;
 
-import es.usj.booksprojects.mapper.AuthorMapper;
-import es.usj.booksprojects.mapper.BookMapper;
 import es.usj.booksprojects.model.Author;
-import es.usj.booksprojects.model.Book;
-import es.usj.booksprojects.serverOperations.valueApi.AuthorValueApi;
-import es.usj.booksprojects.serverOperations.valueApi.AuthorsApiResponse;
-import es.usj.booksprojects.serverOperations.valueApi.BookValueApi;
-import es.usj.booksprojects.serverOperations.valueApi.BooksApiResponse;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
