@@ -25,6 +25,15 @@ public final class BookData {
         books = new ArrayList<Book>();
     }
 
+    public Book getBookByKey(String key){
+        for (Book book: books) {
+            if(book.getKey().equals(key)){
+                return book;
+            }
+        }
+        return null;
+    }
+
     public static BookData getInstance() {
         if (instance == null) {
             instance = new BookData();
