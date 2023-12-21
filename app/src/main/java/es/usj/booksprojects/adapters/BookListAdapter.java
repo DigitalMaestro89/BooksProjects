@@ -4,6 +4,7 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -12,6 +13,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.List;
 
 import es.usj.booksprojects.R;
+import es.usj.booksprojects.data.ImageData;
 import es.usj.booksprojects.model.Book;
 
 public class BookListAdapter extends RecyclerView.Adapter<BookListAdapter.BookViewHolder> {
@@ -41,6 +43,11 @@ public class BookListAdapter extends RecyclerView.Adapter<BookListAdapter.BookVi
         if(localDataSet != null && position < localDataSet.size()){
             Book book = localDataSet.get(position);
             holder.tvBookTitle.setText(book.getTitle().toString());
+            String isbn = book.getPrincipalIsbn();
+            if(isbn != null){
+                ImageView imageView =  holder.itemView.findViewById(R.id.imageView);
+                imageView.setImageBitmap(ImageData.getInstance().getImage(isbn));
+            }
         }
     }
 

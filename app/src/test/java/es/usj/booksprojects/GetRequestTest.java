@@ -9,7 +9,7 @@ import java.util.List;
 
 import es.usj.booksprojects.model.Book;
 import es.usj.booksprojects.serverOperations.GetRequest;
-import es.usj.booksprojects.serverOperations.callback.GetRequestCallback;  // Assurez-vous d'importer la classe correcte
+import es.usj.booksprojects.serverOperations.callback.BookGetRequestCallback;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
@@ -25,7 +25,7 @@ public class GetRequestTest {
         String searchName = "velo";
 
         // Utiliser un callback personnalisé pour traiter les résultats
-        getRequest.retrBooks(searchName, new GetRequestCallback() {
+        getRequest.retrBooks(searchName, new BookGetRequestCallback() {
             @Override
             public void onSuccess(List<Book> books) {
                 // Vérifier que la liste de livres n'est pas vide

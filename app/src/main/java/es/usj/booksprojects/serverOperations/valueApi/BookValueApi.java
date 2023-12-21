@@ -2,7 +2,6 @@ package es.usj.booksprojects.serverOperations.valueApi;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
-
 import java.util.List;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
@@ -21,10 +20,7 @@ public class BookValueApi {
     private String medianPageNumber;
 
     @JsonProperty("isbn")
-    private List<String> isbnList;
-
-    @JsonProperty("language")
-    private List<String> languages;
+    private List<String> isbn;
 
     @JsonProperty("publish_date")
     private List<String> publishDates;
@@ -35,8 +31,6 @@ public class BookValueApi {
     @JsonProperty("cover_i")
     private String coverI;
 
-    @JsonProperty("cover_edition_key")
-    private String coverEditionKey;
 
     @Override
     public String toString() {
@@ -45,12 +39,10 @@ public class BookValueApi {
                 ", authors=" + authors +
                 ", authorsKeys=" + authorsKeys +
                 ", medianPageNumber='" + medianPageNumber + '\'' +
-                ", isbnList=" + isbnList +
-                ", languages=" + languages +
+                ", isbnList=" + isbn +
                 ", publishDates=" + publishDates +
                 ", publishYears=" + publishYears +
                 ", coverI='" + coverI + '\'' +
-                ", coverEditionKey='" + coverEditionKey + '\'' +
                 '}';
     }
 
@@ -71,12 +63,9 @@ public class BookValueApi {
     }
 
     public List<String> getIsbnList() {
-        return isbnList;
+        return isbn;
     }
 
-    public List<String> getLanguages() {
-        return languages;
-    }
 
     public List<String> getPublishDates() {
         return publishDates;
@@ -90,8 +79,5 @@ public class BookValueApi {
         return coverI;
     }
 
-    public String getCoverEditionKey() {
-        return coverEditionKey;
-    }
 
 }
