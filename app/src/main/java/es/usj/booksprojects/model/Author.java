@@ -9,21 +9,67 @@ import java.util.List;
 public class Author {
 
     @PrimaryKey
-    private List<Integer> keys;
-    private List<String> names;
-    public List<Integer> getKeys() {
-        return keys;
+    private int id;
+
+    private String name;
+
+    private String biographie;
+
+    private String wikipedia;
+
+    private String website;
+
+    private String birthDate;
+
+    public String getName() {
+        return name;
     }
 
-    public void setKeys(List<Integer> keys) {
-        this.keys = keys;
+    public void setName(String name) {
+        this.name = name;
     }
 
-    public List<String> getNames() {
-        return names;
+    public String getBiographie() {
+        return biographie;
     }
 
-    public void setNames(List<String> names) {
-        this.names = names;
+    public void setBiographie(String biographie) {
+        this.biographie = biographie;
+    }
+
+    public String getWikipedia() {
+        return wikipedia;
+    }
+
+    public void setWikipedia(String wikipedia) {
+        this.wikipedia = wikipedia;
+    }
+
+    public String getWebsite() {
+        return website;
+    }
+
+    public void setWebsite(String website) {
+        this.website = website;
+    }
+
+    public String getBirthDate() {
+        return birthDate;
+    }
+
+    public void setBirthDate(String birthDate) {
+        this.birthDate = birthDate;
+    }
+
+    @Override
+    public String toString() {
+        return "Author{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", biographie='" + biographie + '\'' +
+                ", wikipedia='" + wikipedia + '\'' +
+                ", website='" + website + '\'' +
+                ", birthDate='" + birthDate + '\'' +
+                '}';
     }
 }
