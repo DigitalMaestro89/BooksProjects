@@ -25,10 +25,13 @@ public class BookListAdapter extends RecyclerView.Adapter<BookListAdapter.BookVi
     private int resourceId;
     //the Id of the layout we will repeat as many times we have items in the list
 
-    public BookListAdapter( int resourceId, List<Book> books){
+    private String listName;
+
+    public BookListAdapter( int resourceId, List<Book> books, String listName){
         //this.context = context;
         this.localDataSet = books;
         this.resourceId = resourceId;
+        this.listName = listName;
     }
 
     @NonNull
@@ -59,10 +62,10 @@ public class BookListAdapter extends RecyclerView.Adapter<BookListAdapter.BookVi
                     int position = holder.getAdapterPosition();
                     if (position != RecyclerView.NO_POSITION) {
                         String keyBook = book.getKey();
-
                         // Ouvrir une nouvelle activité en transmettant les données du livre
                         Intent intent = new Intent(view.getContext(), BookActivity.class);
                         intent.putExtra("BOOK_KEY", keyBook);
+                        intent.putExtra("BookListName",listName);
                         view.getContext().startActivity(intent);
                     }
                 }

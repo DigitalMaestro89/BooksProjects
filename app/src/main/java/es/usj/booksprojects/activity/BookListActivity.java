@@ -24,9 +24,12 @@ public class BookListActivity extends AppCompatActivity {
     private RecyclerView rvYourList;
     private RecyclerView rvNewBooks;
     private int cardViewId = R.layout.view_book_card;
-    private BookListAdapter adapter;
 
-    public static BookData bookList;
+    private BookListAdapter adapterYourList;
+    private BookListAdapter adapterNewList;
+
+    public static BookData yourList;
+    public static BookData newList;
 
 
 
@@ -37,6 +40,7 @@ public class BookListActivity extends AppCompatActivity {
         setContentView(R.layout.activity_book_list);
 
         GetRequest getRequest = new GetRequest();
+        GetRequest getRequest2 = new GetRequest();
 
         rvYourList = findViewById(R.id.rvYourList);
         rvNewBooks = findViewById(R.id.rvNewBooks);
@@ -47,13 +51,11 @@ public class BookListActivity extends AppCompatActivity {
                 Log.d("BookListActivity", "onSuccess() : Livres récupérés avec succès");
                 Log.e("Taille books", Integer.toString(books.size()));
 
-                bookList = new BookData(books);
+                yourList = new BookData(books);
+                adapterYourList = new BookListAdapter(cardViewId, new ArrayList<>(books),"YourList");
 
-                adapter = new BookListAdapter(cardViewId, new ArrayList<>(books));
-                rvNewBooks.setLayoutManager(new LinearLayoutManager(BookListActivity.this, LinearLayoutManager.HORIZONTAL, false));
-                rvNewBooks.setAdapter(adapter);
                 rvYourList.setLayoutManager(new LinearLayoutManager(BookListActivity.this, LinearLayoutManager.HORIZONTAL, false));
-                rvYourList.setAdapter(adapter);
+                rvYourList.setAdapter(adapterYourList);
 
                 for (Book bookItem:books) {
                     Log.e("TestBooks",books.toString());
@@ -62,9 +64,7 @@ public class BookListActivity extends AppCompatActivity {
                         @Override
                         public void onSuccess(Bitmap image) {
                             Log.e("RetrImage",bookItem.toString());
-                            adapter = new BookListAdapter(cardViewId, new ArrayList<>(books));
-                            rvYourList.setAdapter(adapter);
-                            rvNewBooks.setAdapter(adapter);
+                            rvYourList.setAdapter(adapterYourList);
                         }
 
                         @Override
@@ -81,11 +81,8 @@ public class BookListActivity extends AppCompatActivity {
                         }
 
                         @Override
-                        public void onFailure(Throwable t) {
-
-                        }
+                        public void onFailure(Throwable t) {}
                     });
-
                 }
             }
 
@@ -94,5 +91,54 @@ public class BookListActivity extends AppCompatActivity {
                 Log.e("Request Failure", t.getMessage());
             }
         });
+
+
+        getRequest2.retrBooks("The Lord of the Rings", new BookGetRequestCallback() {
+            @Override
+            public void onSuccess(List<Book> books) {
+                Log.d("BookListActivity", "onSuccess() : Livres récupérés avec succès");
+                Log.e("Taille books", Integer.toString(books.size()));
+
+                newList = new BookData(books);
+
+                adapterNewList = new BookListAdapter(cardViewId, new ArrayList<>(books),"NewBooks");
+                rvNewBooks.setLayoutManager(new LinearLayoutManager(BookListActivity.this, LinearLayoutManager.HORIZONTAL, false));
+                rvNewBooks.setAdapter(adapterNewList);
+
+                for (Book bookItem:books) {
+                    Log.e("TestBooks",books.toString());
+                    GetRequest getRequestImage = new GetRequest();
+                    getRequestImage.retrBookImage(bookItem, new ImageBookGetRequestCallback() {
+                        @Override
+                        public void onSuccess(Bitmap image) {
+                            Log.e("RetrImage",bookItem.toString());
+                            rvNewBooks.setAdapter(adapterNewList);
+                        }
+
+                        @Override
+                        public void onFailure() {
+
+                        }
+                    });
+
+                    GetRequest getRequestAuthor = new GetRequest();
+                    getRequestAuthor.retrAuthor("OL2622837A", new AuthorGetRequestCallback() {
+                        @Override
+                        public void onSuccess(Author author) {
+                            Log.e("AUTHOR TEST", author.toString());
+                        }
+
+                        @Override
+                        public void onFailure(Throwable t) {}
+                    });
+                }
+            }
+
+            @Override
+            public void onFailure(Throwable t) {
+                Log.e("Request Failure", t.getMessage());
+            }
+        });
+
     }
 }
