@@ -26,7 +26,7 @@ public class BookActivity extends AppCompatActivity {
         if (intent != null) {
             String keyBook = intent.getStringExtra("BOOK_KEY");
             if (keyBook != null) {
-                Book book = BookData.getInstance().getBookByKey(keyBook);
+                Book book = BookListActivity.bookList.getBookByKey(keyBook);
                 Log.e("Book Tag", book.toString());
 
 

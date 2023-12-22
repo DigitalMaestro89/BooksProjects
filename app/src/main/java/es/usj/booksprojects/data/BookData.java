@@ -5,13 +5,17 @@ import java.util.List;
 
 import es.usj.booksprojects.model.Book;
 
-
-// we need just 1 instance of this class  --> singleton
-// cf https://developpement-informatique.com/article/254/les-singletons-en-java
-
-public final class BookData {
-    private static BookData instance;
+public class BookData {
     private List<Book> books;
+
+    public BookData(){
+        books = new ArrayList<>();
+    }
+
+    public BookData(List<Book> books){
+        this.books = new ArrayList<>();
+        this.books = books;
+    }
 
     public List<Book> getBooks() {
         return books;
@@ -19,10 +23,6 @@ public final class BookData {
 
     public void setBooks(List<Book> books) {
         this.books = books;
-    }
-
-    private BookData(){
-        books = new ArrayList<Book>();
     }
 
     public Book getBookByKey(String key){
@@ -33,14 +33,5 @@ public final class BookData {
         }
         return null;
     }
-
-    public static BookData getInstance() {
-        if (instance == null) {
-            instance = new BookData();
-        }
-        return instance;
-    }
-    // to create or retrieve this instance in exeternal class :
-    // BookData booksSingleton = BookData.getInstance();
 
 }

@@ -26,6 +26,8 @@ public class BookListActivity extends AppCompatActivity {
     private int cardViewId = R.layout.view_book_card;
     private BookListAdapter adapter;
 
+    public static BookData bookList;
+
 
 
     @Override
@@ -45,7 +47,7 @@ public class BookListActivity extends AppCompatActivity {
                 Log.d("BookListActivity", "onSuccess() : Livres récupérés avec succès");
                 Log.e("Taille books", Integer.toString(books.size()));
 
-                BookData.getInstance().setBooks(books);
+                bookList = new BookData(books);
 
                 adapter = new BookListAdapter(cardViewId, new ArrayList<>(books));
                 rvNewBooks.setLayoutManager(new LinearLayoutManager(BookListActivity.this, LinearLayoutManager.HORIZONTAL, false));
