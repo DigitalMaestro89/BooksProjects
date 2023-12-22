@@ -70,7 +70,7 @@ public class BookListActivity extends AppCompatActivity {
                         }
                     });
 
-                    /*
+
 
                     GetRequest getRequestAuthor = new GetRequest();
                     getRequestAuthor.retrAuthor("OL2622837A", new AuthorGetRequestCallback() {
@@ -83,7 +83,7 @@ public class BookListActivity extends AppCompatActivity {
                         public void onFailure(Throwable t) {}
                     });
 
-                     */
+
                 }
                 Log.d("DEBUG", "Je sors de la boucle" + books.toString());
             }
@@ -95,7 +95,17 @@ public class BookListActivity extends AppCompatActivity {
         });
 
 
-        /*
+        Log.i("DEBUG","testAuthorAvant");
+        GetRequest getRequestAuthor = new GetRequest();
+        getRequestAuthor.retrAuthor("OL2622837A", new AuthorGetRequestCallback() {
+            @Override
+            public void onSuccess(Author author) {
+                Log.i("DEBUG","testAuthor"+ author.toString());
+            }
+
+            @Override
+            public void onFailure(Throwable t) {}
+        });
 
 
         getRequest2.retrBooks("The Lord of the Rings", new BookGetRequestCallback() {
@@ -125,17 +135,6 @@ public class BookListActivity extends AppCompatActivity {
 
                         }
                     });
-
-                    GetRequest getRequestAuthor = new GetRequest();
-                    getRequestAuthor.retrAuthor("OL2622837A", new AuthorGetRequestCallback() {
-                        @Override
-                        public void onSuccess(Author author) {
-                            Log.i("DEBUG", author.toString());
-                        }
-
-                        @Override
-                        public void onFailure(Throwable t) {}
-                    });
                 }
             }
 
@@ -143,7 +142,7 @@ public class BookListActivity extends AppCompatActivity {
             public void onFailure(Throwable t) {
                 Log.e("DEBUG", t.getMessage());
             }
-        }); */
+        });
 
     }
 }

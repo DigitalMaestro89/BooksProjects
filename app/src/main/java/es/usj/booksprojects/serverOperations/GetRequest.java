@@ -2,6 +2,10 @@ package es.usj.booksprojects.serverOperations;
 
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+
+import java.util.List;
+
+import es.usj.booksprojects.data.ImageData;
 import es.usj.booksprojects.model.Book;
 import es.usj.booksprojects.serverOperations.apiService.AuthorApiService;
 import es.usj.booksprojects.serverOperations.apiService.BookApiService;
@@ -12,6 +16,7 @@ import es.usj.booksprojects.serverOperations.valueApi.AuthorValueApi;
 import es.usj.booksprojects.serverOperations.valueApi.BooksApiResponse;
 import okhttp3.ResponseBody;
 import retrofit2.Call;
+import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
@@ -28,13 +33,12 @@ public class GetRequest {
                 .build();
 
         BookApiService apiService = retrofit.create(BookApiService.class);
-        Call<BooksApiResponse> call = apiService.getBooks(searchName,1);
+        Call<BooksApiResponse> call = apiService.getBooks(searchName,10);
 
         call.enqueue(callback);
     }
 
     public void retrBookImage(Book book, ImageBookGetRequestCallback callback) {
-
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl(BASE_URL_COVER)
                 .addConverterFactory(GsonConverterFactory.create())
@@ -42,14 +46,48 @@ public class GetRequest {
 
         BookApiService apiService = retrofit.create(BookApiService.class);
 
-        if (book.getIsbnList() != null) {
-            for (String isbn : book.getIsbnList()) {
-                Call<ResponseBody> call = apiService.getImageBook(isbn);
-                ImageBookGetRequestCallback.ImageResponseHandler responseHandler = new ImageBookGetRequestCallback.ImageResponseHandler(callback, book, isbn);
-                call.enqueue(responseHandler);
-            }
+        if (book.getIsbnList() != null && !book.getIsbnList().isEmpty()) {
+            retrieveImageForIsbn(apiService, book, callback, book.getIsbnList(), 0);
+        } else {
+            callback.onFailure();
         }
     }
+
+    private void retrieveImageForIsbn(BookApiService apiService, Book book, ImageBookGetRequestCallback callback, List<String> isbnList, int index) {
+        if (index >= isbnList.size()) {
+            callback.onFailure();
+            return;
+        }
+
+        String isbn = isbnList.get(index);
+        Call<ResponseBody> call = apiService.getImageBook(isbn);
+        ImageBookGetRequestCallback.ImageResponseHandler responseHandler =
+                new ImageBookGetRequestCallback.ImageResponseHandler(callback, book, isbn) {
+                    @Override
+                    public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                        if (response.isSuccessful()) {
+                            String contentType = response.headers().get("content-type");
+                            if (book.getPrincipalIsbn() == null) {
+                                if (contentType != null && contentType.equals("image/jpeg")) {
+                                    Bitmap image = GetRequest.convertResponseBodyToBitmap(response.body());
+                                    ImageData.getInstance().addImage(isbn, image);
+                                    book.setPrincipalIsbn(isbn);
+                                    callback.onSuccess(image); // Passer les données au callback
+                                    return;
+                                }
+                            }
+                        }
+                        retrieveImageForIsbn(apiService, book, callback, isbnList, index + 1);
+                    }
+
+                    @Override
+                    public void onFailure(Call<ResponseBody> call, Throwable t) {
+                        retrieveImageForIsbn(apiService, book, callback, isbnList, index + 1);
+                    }
+                };
+        call.enqueue(responseHandler);
+    }
+
 
     public void retrAuthor(String authorKey, AuthorGetRequestCallback callback){
         Retrofit retrofit = new Retrofit.Builder()
