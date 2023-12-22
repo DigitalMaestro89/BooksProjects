@@ -35,7 +35,7 @@ public class BookActivity extends AppCompatActivity {
                     book = BookListActivity.yourList.getBookByKey(keyBook);
                 }
 
-                Log.e("Book Tag", book.toString());
+                Log.i("DEBUG", "BookACTivity : "+book.toString());
 
                 ImageView imageView = findViewById(R.id.ivBook);
                 String bookCoverIsbn = book.getPrincipalIsbn();

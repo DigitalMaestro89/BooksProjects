@@ -20,7 +20,7 @@ public class BookMapper {
 
         book.setKey(effectiveKey);
 
-        Log.e("mapper",valueApi.toString());
+        Log.d("DEBUG","MAPPER : " + valueApi.toString());
         //...
         return book;
     }

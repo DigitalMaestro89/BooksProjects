@@ -28,7 +28,7 @@ public class GetRequest {
                 .build();
 
         BookApiService apiService = retrofit.create(BookApiService.class);
-        Call<BooksApiResponse> call = apiService.getBooks(searchName,5);
+        Call<BooksApiResponse> call = apiService.getBooks(searchName,1);
 
         call.enqueue(callback);
     }
