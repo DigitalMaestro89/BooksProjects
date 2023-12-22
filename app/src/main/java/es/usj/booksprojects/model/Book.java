@@ -11,20 +11,32 @@ public class Book {
         @PrimaryKey
         private int id;
 
+        private String key;
+
         private String title;
 
         private String principalIsbn;
 
         private List<String> isbnList = new ArrayList<>();
 
-    private List<Integer> genres;
+        private List<Integer> genres;
 
-        private int author;
+        private String authorName;
 
-   public Book(int id, String title){
-       this.id = id;
-       this.title = title;
-   }
+        private String authorKey;
+
+    public String getKey() {
+        return key;
+    }
+
+    public void setKey(String key) {
+        this.key = key;
+    }
+
+    public Book(int id, String title){
+            this.id = id;
+            this.title = title;
+        }
 
     public Book() {
     }
@@ -37,6 +49,22 @@ public class Book {
         return isbnList;
     }
 
+    public String getAuthorName() {
+        return authorName;
+    }
+
+    public void setAuthorName(String authorName) {
+        this.authorName = authorName;
+    }
+
+    public String getAuthorKey() {
+        return authorKey;
+    }
+
+    public void setAuthorKey(String authorKey) {
+        this.authorKey = authorKey;
+    }
+
     public String getTitle() {
                 return title;
         }
@@ -45,9 +73,6 @@ public class Book {
         return principalIsbn;
     }
 
-    public int getAuthor() {
-                return author;
-        }
 
         public List<Integer> getGenres() {
                 return genres;
@@ -65,9 +90,6 @@ public class Book {
         this.isbnList = isbnList;
     }
 
-    public void setAuthor(int author) {
-                this.author = author;
-        }
 
     public void setPrincipalIsbn(String principalIsbn) {
         this.principalIsbn = principalIsbn;
@@ -81,10 +103,13 @@ public class Book {
     public String toString() {
         return "Book{" +
                 "id=" + id +
+                ", key='" + key + '\'' +
                 ", title='" + title + '\'' +
                 ", principalIsbn='" + principalIsbn + '\'' +
+                ", isbnList=" + isbnList +
                 ", genres=" + genres +
-                ", author=" + author +
+                ", authorName='" + authorName + '\'' +
+                ", authorKey='" + authorKey + '\'' +
                 '}';
     }
 }
