@@ -35,13 +35,13 @@ public class BookActivity extends AppCompatActivity {
                     book = BookListActivity.yourList.getBookByKey(keyBook);
                 }
 
-                //Book book = BookListActivity.newList.getBookByKey(keyBook);
                 Log.e("Book Tag", book.toString());
 
-
                 ImageView imageView = findViewById(R.id.ivBook);
-                imageView.setImageBitmap(ImageData.getInstance().getImage(book.getPrincipalIsbn()));
-
+                String bookCoverIsbn = book.getPrincipalIsbn();
+                if(bookCoverIsbn != null){
+                    imageView.setImageBitmap(ImageData.getInstance().getImage(bookCoverIsbn));
+                }
                 TextView tvTitleBook = findViewById(R.id.tvTitleBook);
                 tvTitleBook.setText(book.getTitle());
                 TextView tvAuthorName = findViewById(R.id.tvAuthorNameBook);

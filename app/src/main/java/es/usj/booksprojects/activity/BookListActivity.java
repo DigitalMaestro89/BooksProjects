@@ -24,13 +24,10 @@ public class BookListActivity extends AppCompatActivity {
     private RecyclerView rvYourList;
     private RecyclerView rvNewBooks;
     private int cardViewId = R.layout.view_book_card;
-
     private BookListAdapter adapterYourList;
     private BookListAdapter adapterNewList;
-
     public static BookData yourList;
     public static BookData newList;
-
 
 
     @Override
