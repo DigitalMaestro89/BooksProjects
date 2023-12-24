@@ -10,6 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 import es.usj.booksprojects.R;
 import es.usj.booksprojects.adapters.BookListAdapter;
+import es.usj.booksprojects.data.AuthorData;
 import es.usj.booksprojects.data.BookData;
 import es.usj.booksprojects.model.Author;
 import es.usj.booksprojects.model.Book;
@@ -70,19 +71,24 @@ public class BookListActivity extends AppCompatActivity {
                         }
                     });
 
+                    String authorKey = bookItem.getAuthorKey();
+                    if(!AuthorData.getInstance().haveAuthor(authorKey)){
+                        GetRequest getRequestAuthor = new GetRequest();
 
+                        getRequestAuthor.retrAuthor(authorKey, new AuthorGetRequestCallback() {
+                            @Override
+                            public void onSuccess(Author author) {
+                                author.setKey(authorKey);
+                                Log.d("DEBUG","OnSuccees Author "+author.toString());
+                                AuthorData.getInstance().addAuthor(author);
+                            }
 
-                    GetRequest getRequestAuthor = new GetRequest();
-                    getRequestAuthor.retrAuthor("OL2622837A", new AuthorGetRequestCallback() {
-                        @Override
-                        public void onSuccess(Author author) {
-                            Log.i("AUTHOR DEBUG", author.toString());
-                        }
-
-                        @Override
-                        public void onFailure(Throwable t) {}
-                    });
-
+                            @Override
+                            public void onFailure(Throwable t) {
+                                Log.e("DEBUG","Onfailure Author ");
+                            }
+                        });
+                    }
 
                 }
                 Log.d("DEBUG", "Je sors de la boucle" + books.toString());
@@ -92,19 +98,6 @@ public class BookListActivity extends AppCompatActivity {
             public void onFailure(Throwable t) {
                 Log.e("Request DEBUG", t.getMessage());
             }
-        });
-
-
-        Log.i("DEBUG","testAuthorAvant");
-        GetRequest getRequestAuthor = new GetRequest();
-        getRequestAuthor.retrAuthor("OL2622837A", new AuthorGetRequestCallback() {
-            @Override
-            public void onSuccess(Author author) {
-                Log.i("DEBUG","testAuthor"+ author.toString());
-            }
-
-            @Override
-            public void onFailure(Throwable t) {}
         });
 
 
@@ -135,6 +128,25 @@ public class BookListActivity extends AppCompatActivity {
 
                         }
                     });
+
+                    String authorKey = bookItem.getAuthorKey();
+                    if(!AuthorData.getInstance().haveAuthor(authorKey)){
+                        GetRequest getRequestAuthor = new GetRequest();
+
+                        getRequestAuthor.retrAuthor(authorKey, new AuthorGetRequestCallback() {
+                            @Override
+                            public void onSuccess(Author author) {
+                                author.setKey(authorKey);
+                                Log.d("DEBUG","OnSuccees Author "+author.toString());
+                                AuthorData.getInstance().addAuthor(author);
+                            }
+
+                            @Override
+                            public void onFailure(Throwable t) {
+                                Log.e("DEBUG","Onfailure Author ");
+                            }
+                        });
+                    }
                 }
             }
 

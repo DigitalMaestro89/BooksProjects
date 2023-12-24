@@ -19,7 +19,9 @@ public class Book {
 
         private List<String> isbnList = new ArrayList<>();
 
-        private List<Integer> genres;
+        private String firstPublishYear;
+
+        private String pageNumber;
 
         private String authorName;
 
@@ -31,6 +33,22 @@ public class Book {
 
     public void setKey(String key) {
         this.key = key;
+    }
+
+    public String getFirstPublishYear() {
+        return firstPublishYear;
+    }
+
+    public void setFirstPublishYear(String firstPublishYear) {
+        this.firstPublishYear = firstPublishYear;
+    }
+
+    public String getPageNumber() {
+        return pageNumber;
+    }
+
+    public void setPageNumber(String pageNumber) {
+        this.pageNumber = pageNumber;
     }
 
     public Book(int id, String title){
@@ -74,10 +92,6 @@ public class Book {
     }
 
 
-        public List<Integer> getGenres() {
-                return genres;
-        }
-
         public void setId(int id) {
                 this.id = id;
         }
@@ -95,10 +109,6 @@ public class Book {
         this.principalIsbn = principalIsbn;
     }
 
-    public void setGenres(List<Integer> genres) {
-                this.genres = genres;
-        }
-
     @Override
     public String toString() {
         return "Book{" +
@@ -107,7 +117,8 @@ public class Book {
                 ", title='" + title + '\'' +
                 ", principalIsbn='" + principalIsbn + '\'' +
                 ", isbnList=" + isbnList +
-                ", genres=" + genres +
+                ", firstPublishYear='" + firstPublishYear + '\'' +
+                ", pageNumber='" + pageNumber + '\'' +
                 ", authorName='" + authorName + '\'' +
                 ", authorKey='" + authorKey + '\'' +
                 '}';

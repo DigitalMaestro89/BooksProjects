@@ -8,8 +8,8 @@
 
     <ImageView
         android:id="@+id/ivBook"
-        android:layout_width="152dp"
-        android:layout_height="109dp"
+        android:layout_width="201dp"
+        android:layout_height="132dp"
         android:layout_marginTop="32dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -18,10 +18,11 @@
 
     <TextView
         android:id="@+id/tvTitleBook"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="200dp"
+        android:layout_height="60dp"
         android:layout_marginTop="24dp"
         android:text="title"
+        android:textAlignment="center"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/ivBook" />
@@ -31,19 +32,56 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="32dp"
-        android:layout_marginTop="80dp"
+        android:layout_marginTop="70dp"
         android:text="Author : "
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tvTitleBook" />
 
     <TextView
         android:id="@+id/tvAuthorNameBook"
+        android:layout_width="225dp"
+        android:layout_height="55dp"
+        android:layout_marginStart="150dp"
+        android:text="AuthorName"
+        android:textColor="#1913F3"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/tvAuthorMetaDAta" />
+
+    <TextView
+        android:id="@+id/tvBookYearMetaData"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="32dp"
-        android:text="AuthorName"
-        app:layout_constraintBottom_toBottomOf="@+id/tvAuthorMetaDAta"
-        app:layout_constraintStart_toEndOf="@+id/tvAuthorMetaDAta"
-        app:layout_constraintTop_toTopOf="@+id/tvAuthorMetaDAta" />
+        android:layout_marginTop="60dp"
+        android:text="Publish Year : "
+        app:layout_constraintStart_toStartOf="@+id/tvAuthorMetaDAta"
+        app:layout_constraintTop_toBottomOf="@+id/tvAuthorMetaDAta" />
+
+    <TextView
+        android:id="@+id/tvPageNumberMetaData"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="60dp"
+        android:text="Number Pages : "
+        app:layout_constraintStart_toStartOf="@+id/tvBookYearMetaData"
+        app:layout_constraintTop_toBottomOf="@+id/tvBookYearMetaData" />
+
+    <TextView
+        android:id="@+id/tvPublishYearBook"
+        android:layout_width="225dp"
+        android:layout_height="55dp"
+        android:layout_marginStart="150dp"
+        android:text="PublishYear"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/tvBookYearMetaData" />
+
+    <TextView
+        android:id="@+id/tvNumberPageBook"
+        android:layout_width="225dp"
+        android:layout_height="55dp"
+        android:layout_marginStart="150dp"
+        android:text="PageNumber"
+        android:textColor="#5C2828"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/tvPageNumberMetaData" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

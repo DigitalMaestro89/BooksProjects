@@ -15,6 +15,9 @@
         android:theme="@style/Theme.BooksProjects"
         tools:targetApi="31">
         <activity
+            android:name=".activity.AuthorActivity"
+            android:exported="false" />
+        <activity
             android:name=".activity.BookActivity"
             android:exported="false" />
         <activity

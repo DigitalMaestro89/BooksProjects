@@ -20,7 +20,6 @@ public final class ImageData {
 
     public Bitmap getImage(String isbn){
         return imageMap.get(isbn);
-        //if ... else
     }
 
     public void addImage(String isbn, Bitmap image){

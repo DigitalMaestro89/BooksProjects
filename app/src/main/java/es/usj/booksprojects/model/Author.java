@@ -11,6 +11,8 @@ public class Author {
     @PrimaryKey
     private int id;
 
+    private String key;
+
     private String name;
 
     private String biographie;
@@ -20,6 +22,8 @@ public class Author {
     private String website;
 
     private String birthDate;
+
+    private String deathDate;
 
     public String getName() {
         return name;
@@ -53,6 +57,22 @@ public class Author {
         this.website = website;
     }
 
+    public void setKey(String key) {
+        this.key = key;
+    }
+
+    public String getKey() {
+        return key;
+    }
+
+    public String getDeathDate() {
+        return deathDate;
+    }
+
+    public void setDeathDate(String deathDate) {
+        this.deathDate = deathDate;
+    }
+
     public String getBirthDate() {
         return birthDate;
     }
@@ -65,11 +85,13 @@ public class Author {
     public String toString() {
         return "Author{" +
                 "id=" + id +
+                ", key='" + key + '\'' +
                 ", name='" + name + '\'' +
                 ", biographie='" + biographie + '\'' +
                 ", wikipedia='" + wikipedia + '\'' +
                 ", website='" + website + '\'' +
                 ", birthDate='" + birthDate + '\'' +
+                ", deathDate='" + deathDate + '\'' +
                 '}';
     }
 }

@@ -22,6 +22,9 @@ public class AuthorValueApi {
     @JsonProperty("birth_date")
     private String birth_date;
 
+    @JsonProperty("death_date")
+    private String death_date;
+
 
     public String getName() {
         return name;
@@ -43,6 +46,10 @@ public class AuthorValueApi {
         return birth_date;
     }
 
+    public String getDeath_date() {
+        return death_date;
+    }
+
     @Override
     public String toString() {
         return "AuthorValueApi{" +
@@ -51,6 +58,7 @@ public class AuthorValueApi {
                 ", wikipedia='" + wikipedia + '\'' +
                 ", website='" + website + '\'' +
                 ", birth_date='" + birth_date + '\'' +
+                ", death_date='" + death_date + '\'' +
                 '}';
     }
 }
