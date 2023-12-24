@@ -25,11 +25,8 @@ public class BookValueApi {
     @JsonProperty("isbn")
     private List<String> isbn;
 
-    @JsonProperty("publish_date")
-    private List<String> publish_date;
-
-    @JsonProperty("publish_year")
-    private List<String> publish_year;
+    @JsonProperty("first_publish_year")
+    private String first_publish_year;
 
     public String getTitle() {
         return title;
@@ -55,12 +52,8 @@ public class BookValueApi {
         return isbn;
     }
 
-    public List<String> getPublish_date() {
-        return publish_date;
-    }
-
-    public List<String> getPublish_year() {
-        return publish_year;
+    public String getFirst_publish_year() {
+        return first_publish_year;
     }
 
     @Override
@@ -72,8 +65,7 @@ public class BookValueApi {
                 ", author_key=" + author_key +
                 ", number_of_pages_median='" + number_of_pages_median + '\'' +
                 ", isbn=" + isbn +
-                ", publish_date=" + publish_date +
-                ", publish_year=" + publish_year +
+                ", first_publish_year=" + first_publish_year +
                 '}';
     }
 }

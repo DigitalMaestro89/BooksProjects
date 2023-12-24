@@ -14,6 +14,7 @@ public class AuthorMapper {
         author.setWikipedia(valueApi.getWikipedia());
         author.setWebsite(valueApi.getWebsite());
         author.setBirthDate(valueApi.getBirth_date());
+        author.setDeathDate(valueApi.getDeath_date());
         Log.e("mapper",valueApi.toString());
         //...
         return author;

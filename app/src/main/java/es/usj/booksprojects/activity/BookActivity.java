@@ -35,17 +35,31 @@ public class BookActivity extends AppCompatActivity {
                     book = BookListActivity.yourList.getBookByKey(keyBook);
                 }
 
-                //Book book = BookListActivity.newList.getBookByKey(keyBook);
-                Log.e("Book Tag", book.toString());
-
+                Log.i("DEBUG", "BookACTivity : "+book.toString());
 
                 ImageView imageView = findViewById(R.id.ivBook);
-                imageView.setImageBitmap(ImageData.getInstance().getImage(book.getPrincipalIsbn()));
-
+                String bookCoverIsbn = book.getPrincipalIsbn();
+                if(bookCoverIsbn != null){
+                    imageView.setImageBitmap(ImageData.getInstance().getImage(bookCoverIsbn));
+                }
                 TextView tvTitleBook = findViewById(R.id.tvTitleBook);
-                tvTitleBook.setText(book.getTitle());
                 TextView tvAuthorName = findViewById(R.id.tvAuthorNameBook);
+                TextView tvBookYear = findViewById(R.id.tvPublishYearBook);
+                TextView tvPageNumber = findViewById(R.id.tvNumberPageBook);
+
+                tvTitleBook.setText(book.getTitle());
                 tvAuthorName.setText(book.getAuthorName());
+                tvBookYear.setText(book.getFirstPublishYear());
+                tvPageNumber.setText(book.getPageNumber());
+
+
+                tvAuthorName.setOnClickListener(view -> {
+                    Intent newIntent = new Intent(BookActivity.this, AuthorActivity.class);
+                    String authorKey = book.getAuthorKey();
+                    newIntent.putExtra("AUTHOR_KEY", authorKey);
+                    startActivity(newIntent);
+                });
+
 
             }
         }
