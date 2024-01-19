@@ -1,16 +1,20 @@
 package es.usj.booksprojects.model;
 
+import androidx.annotation.NonNull;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 @Entity(tableName = "Books")
 public class Book {
-        @PrimaryKey
+
         private int id;
 
+        @PrimaryKey
+        @NonNull
         private String key;
 
         private String title;
@@ -27,6 +31,8 @@ public class Book {
 
         private String authorKey;
 
+        private boolean isStar;
+
     public String getKey() {
         return key;
     }
@@ -37,6 +43,14 @@ public class Book {
 
     public String getFirstPublishYear() {
         return firstPublishYear;
+    }
+
+    public boolean isStar() {
+        return isStar;
+    }
+
+    public void setStar(boolean star) {
+        isStar = star;
     }
 
     public void setFirstPublishYear(String firstPublishYear) {
@@ -107,6 +121,19 @@ public class Book {
 
     public void setPrincipalIsbn(String principalIsbn) {
         this.principalIsbn = principalIsbn;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Book book = (Book) o;
+        return Objects.equals(key, book.key);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(key, title, principalIsbn, isbnList, firstPublishYear, pageNumber, authorName, authorKey, isStar);
     }
 
     @Override
