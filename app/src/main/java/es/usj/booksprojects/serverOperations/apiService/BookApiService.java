@@ -14,6 +14,9 @@ public interface BookApiService {
             @Query("q") String searchName,
             @Query("limit") int limit);
 
+
+    //https://openlibrary.org/search.json?q=your_search_query&limit=10
+
     // https://covers.openlibrary.org/b/isbn/9780130501042-S.jpg
     @GET("b/isbn/{isbn}-M.jpg")
     Call<ResponseBody> getImageBook(

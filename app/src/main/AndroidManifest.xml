@@ -26,7 +26,7 @@
         <activity
             android:name=".activity.SplashActivity"
             android:exported="true">
-            <intent-filter>
+            <intent-filter>  ;                                                                                                                                                                                     l
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
