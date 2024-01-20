@@ -2,6 +2,7 @@ package es.usj.booksprojects.adapters;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -51,7 +52,10 @@ public class BookListAdapter extends RecyclerView.Adapter<BookListAdapter.BookVi
             String isbn = book.getPrincipalIsbn();
             if(isbn != null){
                 ImageView imageView =  holder.itemView.findViewById(R.id.imageView);
-                imageView.setImageBitmap(ImageData.getInstance().getImage(isbn));
+                Bitmap imageBook = ImageData.getInstance().getImage(isbn);
+                if(imageBook!=null){
+                    imageView.setImageBitmap(ImageData.getInstance().getImage(isbn));
+                }
             }
 
             // Gestion du clic sur la carte
