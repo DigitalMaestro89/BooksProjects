@@ -45,7 +45,7 @@ public class SearchActivity extends AppCompatActivity {
         searchTextView = findViewById(R.id.searchTextView);
 
         searchResults = new BookData();
-        recyclerView.setLayoutManager(new GridLayoutManager(this, 2)); //2 colonnes
+        recyclerView.setLayoutManager(new GridLayoutManager(this, 3)); //2 colonnes
 
 
         adapter = new BookListAdapter(R.layout.view_book_card, searchResults.getBooks(), "SearchResults");
