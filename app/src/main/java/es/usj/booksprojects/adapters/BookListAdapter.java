@@ -88,4 +88,10 @@ public class BookListAdapter extends RecyclerView.Adapter<BookListAdapter.BookVi
         }
     }
 
+    public void updateBooks(List<Book> newBooks) {
+        localDataSet.clear();
+        localDataSet.addAll(newBooks);
+        notifyDataSetChanged();
+    }
+
 }

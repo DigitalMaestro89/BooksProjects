@@ -1,10 +1,14 @@
 package es.usj.booksprojects.activity;
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.widget.ImageView;
+
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -45,6 +49,15 @@ public class BookListActivity extends AppCompatActivity {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_book_list);
+
+        ImageView ivSearchImageView = findViewById(R.id.ivSearch);
+        ivSearchImageView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(BookListActivity.this, SearchActivity.class);
+                startActivity(intent);
+            }
+        });
 
         GetRequest getRequest = new GetRequest();
         GetRequest getRequest2 = new GetRequest();
@@ -144,7 +157,7 @@ public class BookListActivity extends AppCompatActivity {
 
                 newList = new BookData(books);
 
-                adapterNewList = new BookListAdapter(cardViewId, new ArrayList<>(books),"NewBooks");
+                    adapterNewList = new BookListAdapter(cardViewId, new ArrayList<>(books),"NewBooks");
                 rvNewBooks.setLayoutManager(new LinearLayoutManager(BookListActivity.this, LinearLayoutManager.HORIZONTAL, false));
                 rvNewBooks.setAdapter(adapterNewList);
 
