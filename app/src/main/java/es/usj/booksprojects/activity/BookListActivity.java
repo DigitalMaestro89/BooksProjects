@@ -87,10 +87,6 @@ public class BookListActivity extends AppCompatActivity {
             }
         }.execute();
 
-
-
-
-
         getRequest.retrBooks("Harry Potter", new BookGetRequestCallback() {
             @Override
             public void onSuccess(List<Book> books) {

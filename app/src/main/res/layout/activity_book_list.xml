@@ -13,6 +13,7 @@
         android:layout_marginTop="16dp"
         android:text="@string/bookflix"
         android:textSize="20sp"
+        android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -25,6 +26,7 @@
         android:layout_marginTop="24dp"
         android:text="@string/your_list"
         android:textSize="18sp"
+        android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tvTitleApp" />
 
@@ -47,6 +49,7 @@
         android:layout_marginTop="32dp"
         android:text="@string/new_books"
         android:textSize="18sp"
+        android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/rvYourList" />
 
@@ -79,6 +82,7 @@
         android:layout_marginTop="32dp"
         android:text="Favorites"
         android:textSize="18sp"
+        android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/rvNewBooks" />
 
