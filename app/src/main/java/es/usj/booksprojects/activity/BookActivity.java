@@ -44,8 +44,10 @@ public class BookActivity extends AppCompatActivity {
                     book = BookListActivity.newList.getBookByKey(keyBook);
                 }else if(bookListName.equals("FavoriteList")){
                     book = BookListActivity.favoriteList.getBookByKey(keyBook);
-                }else {
+                }else if(bookListName.equals("YourList")){
                     book = BookListActivity.yourList.getBookByKey(keyBook);
+                } else {
+                    book = SearchActivity.searchList.getBookByKey(keyBook);
                 }
 
                 Log.i("DEBUG", "BookACTivity : "+book.toString());

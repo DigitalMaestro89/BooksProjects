@@ -32,6 +32,7 @@ public class SearchActivity extends AppCompatActivity {
     private TextView searchTextView;
     private BookListAdapter adapter;
     private BookData searchResults;
+    public static BookData searchList;
 
 
     @Override
@@ -57,22 +58,6 @@ public class SearchActivity extends AppCompatActivity {
                 performSearch();
             }
         });
-
-        /*
-        SearchBookListAdapter searchAdapter = new SearchBookListAdapter(R.layout.view_book_card, searchResults.getBooks());
-        recyclerView.setAdapter(searchAdapter);
-
-        searchAdapter.setOnItemClickListener(new SearchBookListAdapter.OnItemClickListener() {
-            @Override
-            public void onItemClick(Book book) {
-                String keyBook = book.getKey();
-                Intent intent = new Intent(SearchActivity.this, BookActivity.class);
-                intent.putExtra("BOOK_KEY", keyBook);
-                intent.putExtra("BookListName", "SearchResults");
-                startActivity(intent);
-            }
-        });*/
-
         recyclerView.setAdapter(adapter);
 
         TextView helloTextView = findViewById(R.id.searchTextView);
@@ -84,9 +69,10 @@ public class SearchActivity extends AppCompatActivity {
 
         if (!TextUtils.isEmpty(searchQuery)) {
             GetRequest getRequest = new GetRequest();
-            getRequest.retrBooks(searchQuery, new BookGetRequestCallback() {
+            getRequest.retrBooks(searchQuery, 99, new BookGetRequestCallback() {
                 @Override
                 public void onSuccess(List<Book> books) {
+                    searchList = new BookData(books);
                     searchResults.setBooks(books);
                     adapter.updateBooks(books);  // Use the new method to update data
                     searchTextView.setText(getString(R.string.search_results, searchQuery));

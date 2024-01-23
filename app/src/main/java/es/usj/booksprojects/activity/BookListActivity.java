@@ -87,7 +87,7 @@ public class BookListActivity extends AppCompatActivity {
             }
         }.execute();
 
-        getRequest.retrBooks("Harry Potter", new BookGetRequestCallback() {
+        getRequest.retrBooks("Harry Potter", 15, new BookGetRequestCallback() {
             @Override
             public void onSuccess(List<Book> books) {
                 Log.i("DEBUG", "LIST BOOK HARRY POTTER : Livres récupérés avec succès");
@@ -145,7 +145,7 @@ public class BookListActivity extends AppCompatActivity {
         });
 
 
-        getRequest2.retrBooks("The Lord of the Rings", new BookGetRequestCallback() {
+        getRequest2.retrBooks("The Lord of the Rings", 15,  new BookGetRequestCallback() {
             @Override
             public void onSuccess(List<Book> books) {
                 Log.i("DEBUG", "onSuccess() : Livres récupérés avec succès");
