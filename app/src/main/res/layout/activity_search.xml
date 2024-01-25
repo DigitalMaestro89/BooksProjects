@@ -6,27 +6,26 @@
     android:layout_height="match_parent"
     tools:context=".activity.SearchActivity">
 
-    <SearchView
-        android:id="@+id/searchView"
+    <EditText
+        android:id="@+id/searchEditText"
         android:layout_width="210dp"
         android:layout_height="0dp"
         android:layout_marginTop="28dp"
-        app:iconifiedByDefault="false"
+        android:hint="Rechercher des livres"
+        android:layout_below="@+id/searchTextView"
         app:layout_constraintTop_toBottomOf="@+id/searchTextView"
-        app:queryHint="Rechercher des livres"
-        tools:ignore="MissingConstraints"
-        tools:layout_editor_absoluteX="25dp" />
+        tools:ignore="MissingConstraints" />
 
     <Button
         android:id="@+id/validerButton"
         android:layout_width="139dp"
         android:layout_height="54dp"
-        android:layout_below="@id/searchView"
+        android:layout_below="@id/searchEditText"
         android:layout_marginStart="20dp"
         android:layout_marginTop="28dp"
         android:textSize="13sp"
         android:text="Rechercher"
-        app:layout_constraintStart_toEndOf="@+id/searchView"
+        app:layout_constraintStart_toEndOf="@+id/searchEditText"
         app:layout_constraintTop_toBottomOf="@+id/searchTextView" />
 
     <TextView
@@ -49,6 +48,6 @@
         android:scrollbars="vertical"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/searchView" />
+        app:layout_constraintTop_toBottomOf="@+id/searchEditText" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
