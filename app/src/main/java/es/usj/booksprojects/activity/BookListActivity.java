@@ -1,8 +1,14 @@
 package es.usj.booksprojects.activity;
 
+import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.graphics.Bitmap;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.widget.ImageView;
+
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -12,6 +18,8 @@ import es.usj.booksprojects.R;
 import es.usj.booksprojects.adapters.BookListAdapter;
 import es.usj.booksprojects.data.AuthorData;
 import es.usj.booksprojects.data.BookData;
+import es.usj.booksprojects.database.AppDatabase;
+import es.usj.booksprojects.database.BookDao;
 import es.usj.booksprojects.model.Author;
 import es.usj.booksprojects.model.Book;
 import es.usj.booksprojects.serverOperations.GetRequest;
@@ -24,26 +32,62 @@ public class BookListActivity extends AppCompatActivity {
 
     private RecyclerView rvYourList;
     private RecyclerView rvNewBooks;
+    private RecyclerView rvFavorite;
     private int cardViewId = R.layout.view_book_card;
     private BookListAdapter adapterYourList;
     private BookListAdapter adapterNewList;
+    private BookListAdapter adapterFavorite;
     public static BookData yourList;
     public static BookData newList;
 
+    public static BookData favoriteList;
 
+
+    @SuppressLint("StaticFieldLeak")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_book_list);
 
+        ImageView ivSearchImageView = findViewById(R.id.ivSearch);
+        ivSearchImageView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(BookListActivity.this, SearchActivity.class);
+                startActivity(intent);
+            }
+        });
+
         GetRequest getRequest = new GetRequest();
         GetRequest getRequest2 = new GetRequest();
 
         rvYourList = findViewById(R.id.rvYourList);
         rvNewBooks = findViewById(R.id.rvNewBooks);
+        rvFavorite = findViewById(R.id.rvFavorites);
 
-        getRequest.retrBooks("Harry Potter", new BookGetRequestCallback() {
+        AppDatabase db = AppDatabase.getInstance(getApplicationContext());
+        // Obtenez les DAO KeyValueDao et BookDao
+        BookDao bookDao = db.bookDao();
+
+        new AsyncTask<Void, Void, Void>() {
+            @Override
+            protected Void doInBackground(Void... voids) {
+                List<Book> favoriteBooks= bookDao.getAllBooks();
+                favoriteList = new BookData(favoriteBooks);
+                return null;
+            }
+
+            @Override
+            protected void onPostExecute(Void aVoid) {
+                adapterFavorite = new BookListAdapter(cardViewId, favoriteList.getBooks(),"FavoriteList");
+                rvFavorite.setLayoutManager(new LinearLayoutManager(BookListActivity.this, LinearLayoutManager.HORIZONTAL, false));
+                rvFavorite.setAdapter(adapterFavorite);
+                super.onPostExecute(aVoid);
+            }
+        }.execute();
+
+        getRequest.retrBooks("Harry Potter", 15, new BookGetRequestCallback() {
             @Override
             public void onSuccess(List<Book> books) {
                 Log.i("DEBUG", "LIST BOOK HARRY POTTER : Livres récupérés avec succès");
@@ -101,7 +145,7 @@ public class BookListActivity extends AppCompatActivity {
         });
 
 
-        getRequest2.retrBooks("The Lord of the Rings", new BookGetRequestCallback() {
+        getRequest2.retrBooks("The Lord of the Rings", 15,  new BookGetRequestCallback() {
             @Override
             public void onSuccess(List<Book> books) {
                 Log.i("DEBUG", "onSuccess() : Livres récupérés avec succès");
@@ -109,7 +153,7 @@ public class BookListActivity extends AppCompatActivity {
 
                 newList = new BookData(books);
 
-                adapterNewList = new BookListAdapter(cardViewId, new ArrayList<>(books),"NewBooks");
+                    adapterNewList = new BookListAdapter(cardViewId, new ArrayList<>(books),"NewBooks");
                 rvNewBooks.setLayoutManager(new LinearLayoutManager(BookListActivity.this, LinearLayoutManager.HORIZONTAL, false));
                 rvNewBooks.setAdapter(adapterNewList);
 
@@ -157,4 +201,13 @@ public class BookListActivity extends AppCompatActivity {
         });
 
     }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        adapterFavorite = new BookListAdapter(cardViewId, favoriteList.getBooks(), "FavoriteList");
+        rvFavorite.setLayoutManager(new LinearLayoutManager(BookListActivity.this, LinearLayoutManager.HORIZONTAL, false));
+        rvFavorite.setAdapter(adapterFavorite);
+    }
+
 }

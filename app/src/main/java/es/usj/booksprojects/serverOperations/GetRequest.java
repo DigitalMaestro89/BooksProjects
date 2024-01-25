@@ -26,14 +26,14 @@ public class GetRequest {
     private static final String BASE_URL = "https://openlibrary.org/";
     private static final String BASE_URL_COVER = "https://covers.openlibrary.org/";
 
-    public void retrBooks(String searchName, BookGetRequestCallback callback) {
+    public void retrBooks(String searchName, int limit, BookGetRequestCallback callback) {
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl(BASE_URL)
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
 
         BookApiService apiService = retrofit.create(BookApiService.class);
-        Call<BooksApiResponse> call = apiService.getBooks(searchName,10);
+        Call<BooksApiResponse> call = apiService.getBooks(searchName,limit);
 
         call.enqueue(callback);
     }

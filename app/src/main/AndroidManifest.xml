@@ -15,6 +15,9 @@
         android:theme="@style/Theme.BooksProjects"
         tools:targetApi="31">
         <activity
+            android:name=".activity.SearchActivity"
+            android:exported="false" />
+        <activity
             android:name=".activity.AuthorActivity"
             android:exported="false" />
         <activity
@@ -27,6 +30,7 @@
             android:name=".activity.SplashActivity"
             android:exported="true">
             <intent-filter>
+                ; l
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />

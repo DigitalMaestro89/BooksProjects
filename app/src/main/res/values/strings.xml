@@ -6,4 +6,5 @@
     <string name="title">Title</string>
     <string name="book_s_logo">book\'s Logo</string>
     <string name="research_logo">research logo</string>
+    <string name="search_results">Search Results for %1$s</string>
 </resources>
