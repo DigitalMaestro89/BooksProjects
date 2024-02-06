@@ -15,22 +15,21 @@
         android:theme="@style/Theme.BooksProjects"
         tools:targetApi="31">
         <activity
-            android:name=".activity.SearchActivity"
+            android:name="fr.eilco.booksprojects.activity.SearchActivity"
             android:exported="false" />
         <activity
-            android:name=".activity.AuthorActivity"
+            android:name="fr.eilco.booksprojects.activity.AuthorActivity"
             android:exported="false" />
         <activity
-            android:name=".activity.BookActivity"
+            android:name="fr.eilco.booksprojects.activity.BookActivity"
             android:exported="false" />
         <activity
-            android:name=".activity.BookListActivity"
+            android:name="fr.eilco.booksprojects.activity.BookListActivity"
             android:exported="false" />
         <activity
-            android:name=".activity.SplashActivity"
+            android:name="fr.eilco.booksprojects.activity.SplashActivity"
             android:exported="true">
             <intent-filter>
-                ; l
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />

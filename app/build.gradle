@@ -3,7 +3,7 @@ plugins {
 }
 
 android {
-    namespace 'es.usj.booksprojects'
+    namespace 'fr.eilco.booksprojects'
     compileSdk 33
 
     buildFeatures {
@@ -13,7 +13,7 @@ android {
 
 
     defaultConfig {
-        applicationId "es.usj.booksprojects"
+        applicationId "fr.eilco.booksprojects"
         minSdk 29
         targetSdk 33
         versionCode 1
