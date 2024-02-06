@@ -25,6 +25,9 @@ public class BookValueApi {
     @JsonProperty("isbn")
     private List<String> isbn;
 
+    @JsonProperty("seed")
+    private List<String> seed;
+
     @JsonProperty("first_publish_year")
     private String first_publish_year;
 
@@ -50,6 +53,10 @@ public class BookValueApi {
 
     public List<String> getIsbn() {
         return isbn;
+    }
+
+    public List<String> getSeed() {
+        return seed;
     }
 
     public String getFirst_publish_year() {

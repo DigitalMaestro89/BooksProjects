@@ -19,12 +19,12 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/tvYourList"
+        android:id="@+id/tvRandomList"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginTop="24dp"
-        android:text="@string/your_list"
+        android:text="Random List :"
         android:textSize="18sp"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
@@ -39,7 +39,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.606"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvYourList" />
+        app:layout_constraintTop_toBottomOf="@+id/tvRandomList" />
 
     <TextView
         android:id="@+id/tvNewBooks"
@@ -95,5 +95,16 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView" />
+
+    <TextView
+        android:id="@+id/tvRandomWord"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:textSize="17sp"
+        android:textStyle="italic"
+        app:layout_constraintBottom_toBottomOf="@+id/tvRandomList"
+        app:layout_constraintStart_toEndOf="@+id/tvRandomList"
+        app:layout_constraintTop_toTopOf="@+id/tvRandomList" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

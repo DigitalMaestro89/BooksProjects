@@ -25,6 +25,7 @@ public class Book {
 
         private String firstPublishYear;
 
+        private String link;
         private String pageNumber;
 
         private String authorName;
@@ -105,8 +106,15 @@ public class Book {
         return principalIsbn;
     }
 
+    public String getLink() {
+        return link;
+    }
 
-        public void setId(int id) {
+    public void setLink(String link) {
+        this.link = link;
+    }
+
+    public void setId(int id) {
                 this.id = id;
         }
 

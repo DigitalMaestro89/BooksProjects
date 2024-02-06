@@ -16,6 +16,15 @@ public class BookMapper {
         book.setFirstPublishYear(valueApi.getFirst_publish_year());
         book.setPageNumber(valueApi.getNumber_of_pages_median());
 
+        String link;
+        if(valueApi.getSeed() != null){
+            link = "https://openlibrary.org".concat(valueApi.getSeed().get(0));
+        }else {
+            link = "https://openlibrary.org";
+        }
+
+        book.setLink(link);
+
         String key = valueApi.getKey();
         int index = key.indexOf("/works/") + "/works/".length();
         String effectiveKey = key.substring(index);

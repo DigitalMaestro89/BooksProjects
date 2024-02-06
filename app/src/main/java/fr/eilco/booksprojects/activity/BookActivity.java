@@ -4,12 +4,16 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
+
+import org.w3c.dom.Text;
 
 import java.util.List;
 
@@ -68,6 +72,7 @@ public class BookActivity extends AppCompatActivity {
                 TextView tvAuthorName = findViewById(R.id.tvAuthorNameBook);
                 TextView tvBookYear = findViewById(R.id.tvPublishYearBook);
                 TextView tvPageNumber = findViewById(R.id.tvNumberPageBook);
+                TextView tvLink = findViewById(R.id.tvLink);
 
                 tvTitleBook.setText(book.getTitle());
                 tvAuthorName.setText(book.getAuthorName());
@@ -130,6 +135,22 @@ public class BookActivity extends AppCompatActivity {
                     }
                 });
 
+                tvLink.setOnClickListener(view -> {
+                    String bookLink = book.getLink();
+
+                    if (bookLink != null && !bookLink.isEmpty()) {
+                        Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(bookLink));
+                        browserIntent.setPackage("com.android.chrome");
+                        startActivity(browserIntent);
+                        if (browserIntent.resolveActivity(getPackageManager()) != null) {
+                            startActivity(browserIntent);
+                        } else {
+                            Toast.makeText(BookActivity.this, "Aucune application de navigation disponible", Toast.LENGTH_SHORT).show();
+                        }
+                    } else {
+                        Toast.makeText(BookActivity.this, "Aucun lien disponible pour ce livre", Toast.LENGTH_SHORT).show();
+                    }
+                });
             }
         }
     }

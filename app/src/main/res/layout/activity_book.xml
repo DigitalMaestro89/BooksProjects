@@ -98,4 +98,16 @@
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@android:drawable/btn_star_big_off" />
 
+    <TextView
+        android:id="@+id/tvLink"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="60dp"
+        android:text="Click Here To See The Book"
+        android:textColor="#2F25E8"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvPageNumberMetaData" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

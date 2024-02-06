@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -87,7 +88,14 @@ public class BookListActivity extends AppCompatActivity {
             }
         }.execute();
 
-        getRequest.retrBooks("Harry Potter", 15, new BookGetRequestCallback() {
+
+        String randomWord = UtilsWord.getRandomWord(this);
+        TextView tvRandomWord = findViewById(R.id.tvRandomWord);
+        if(!randomWord.isEmpty()){
+            tvRandomWord.setText(randomWord);
+        }
+        Log.i("RANDOM",randomWord);
+        getRequest.retrBooks(randomWord, 15, new BookGetRequestCallback() {
             @Override
             public void onSuccess(List<Book> books) {
                 Log.i("DEBUG", "LIST BOOK HARRY POTTER : Livres récupérés avec succès");

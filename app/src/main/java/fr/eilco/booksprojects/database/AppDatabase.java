@@ -9,7 +9,7 @@ import androidx.room.TypeConverters;
 
 import fr.eilco.booksprojects.model.Book;
 
-@Database(entities = {Book.class}, version = 3)
+@Database(entities = {Book.class}, version = 4)
 @TypeConverters(ClassConverter.class)
 public abstract class AppDatabase extends RoomDatabase {
     public abstract BookDao bookDao();
