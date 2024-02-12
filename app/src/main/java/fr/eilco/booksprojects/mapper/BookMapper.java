@@ -30,9 +30,6 @@ public class BookMapper {
         String effectiveKey = key.substring(index);
 
         book.setKey(effectiveKey);
-
-        Log.d("DEBUG","MAPPER : " + valueApi.toString());
-        //...
         return book;
     }
 }

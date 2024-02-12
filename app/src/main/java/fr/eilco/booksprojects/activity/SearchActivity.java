@@ -80,7 +80,6 @@ public class SearchActivity extends AppCompatActivity {
                     searchTextView.setText(getString(R.string.search_results, searchQuery));
 
                     for (Book bookItem:searchList.getBooks()){
-                        Log.d("DEBUG", "Je rentre dans la boucle" + books.toString());
                         String authorKey = bookItem.getAuthorKey();
                         if(!AuthorData.getInstance().haveAuthor(authorKey)){
                             GetRequest getRequestAuthor = new GetRequest();
@@ -89,13 +88,11 @@ public class SearchActivity extends AppCompatActivity {
                                 @Override
                                 public void onSuccess(Author author) {
                                     author.setKey(authorKey);
-                                    Log.d("DEBUG","OnSuccees Author "+author.toString());
                                     AuthorData.getInstance().addAuthor(author);
                                 }
 
                                 @Override
                                 public void onFailure(Throwable t) {
-                                    Log.e("DEBUG","Onfailure Author ");
                                 }
                             });
                         }

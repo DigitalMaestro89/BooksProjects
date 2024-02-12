@@ -98,8 +98,6 @@ public class BookListActivity extends AppCompatActivity {
         getRequest.retrBooks(randomWord, 15, new BookGetRequestCallback() {
             @Override
             public void onSuccess(List<Book> books) {
-                Log.i("DEBUG", "LIST BOOK HARRY POTTER : Livres récupérés avec succès");
-                Log.i("DEBUG","Taille livre " + Integer.toString(books.size()));
 
                 randomList = new BookData(books);
                 adapterRandomList = new BookListAdapter(cardViewId, new ArrayList<>(books),"RandomList");
@@ -108,18 +106,15 @@ public class BookListActivity extends AppCompatActivity {
                 rvRandomList.setAdapter(adapterRandomList);
 
                 for (Book bookItem:randomList.getBooks()) {
-                    Log.d("DEBUG", "Je rentre dans la boucle" + books.toString());
                     GetRequest getRequestImage = new GetRequest();
                     getRequestImage.retrBookImage(bookItem, new ImageBookGetRequestCallback() {
                         @Override
                         public void onSuccess(Bitmap image) {
-                            Log.d("DEBUG","OnSuccees ImageBOOK "+bookItem.toString());
                             rvRandomList.setAdapter(adapterRandomList);
                         }
 
                         @Override
                         public void onFailure() {
-                            Log.e("DEBUG","Onfailure ImageBOOK " + bookItem.toString());
                         }
                     });
 
@@ -131,19 +126,16 @@ public class BookListActivity extends AppCompatActivity {
                             @Override
                             public void onSuccess(Author author) {
                                 author.setKey(authorKey);
-                                Log.d("DEBUG","OnSuccees Author "+author.toString());
                                 AuthorData.getInstance().addAuthor(author);
                             }
 
                             @Override
                             public void onFailure(Throwable t) {
-                                Log.e("DEBUG","Onfailure Author ");
                             }
                         });
                     }
 
                 }
-                Log.d("DEBUG", "Je sors de la boucle" + books.toString());
             }
 
             @Override
@@ -156,22 +148,18 @@ public class BookListActivity extends AppCompatActivity {
         getRequest2.retrBooks("The Lord of the Rings", 15,  new BookGetRequestCallback() {
             @Override
             public void onSuccess(List<Book> books) {
-                Log.i("DEBUG", "onSuccess() : Livres récupérés avec succès");
-                Log.i("Taille DEBUG", Integer.toString(books.size()));
 
                 newList = new BookData(books);
 
-                    adapterNewList = new BookListAdapter(cardViewId, new ArrayList<>(books),"NewBooks");
+                adapterNewList = new BookListAdapter(cardViewId, new ArrayList<>(books),"NewBooks");
                 rvNewBooks.setLayoutManager(new LinearLayoutManager(BookListActivity.this, LinearLayoutManager.HORIZONTAL, false));
                 rvNewBooks.setAdapter(adapterNewList);
 
                 for (Book bookItem:newList.getBooks()) {
-                    Log.i("DEBUG",books.toString());
                     GetRequest getRequestImage = new GetRequest();
                     getRequestImage.retrBookImage(bookItem, new ImageBookGetRequestCallback() {
                         @Override
                         public void onSuccess(Bitmap image) {
-                            Log.i("DEBUG",bookItem.toString());
                             rvNewBooks.setAdapter(adapterNewList);
                         }
 
@@ -189,13 +177,11 @@ public class BookListActivity extends AppCompatActivity {
                             @Override
                             public void onSuccess(Author author) {
                                 author.setKey(authorKey);
-                                Log.d("DEBUG","OnSuccees Author "+author.toString());
                                 AuthorData.getInstance().addAuthor(author);
                             }
 
                             @Override
                             public void onFailure(Throwable t) {
-                                Log.e("DEBUG","Onfailure Author ");
                             }
                         });
                     }
@@ -204,7 +190,7 @@ public class BookListActivity extends AppCompatActivity {
 
             @Override
             public void onFailure(Throwable t) {
-                Log.e("DEBUG", t.getMessage());
+                ;
             }
         });
 

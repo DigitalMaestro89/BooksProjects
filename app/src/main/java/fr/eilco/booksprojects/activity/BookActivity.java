@@ -56,7 +56,6 @@ public class BookActivity extends AppCompatActivity {
                     book = SearchActivity.searchList.getBookByKey(keyBook);
                 }
 
-                Log.i("DEBUG", "BookACTivity : "+book.toString());
 
                 boolean isStarred = book.isStar();
                 if(isStarred){
@@ -121,14 +120,12 @@ public class BookActivity extends AppCompatActivity {
                                     // Aucun livre similaire trouvé, vous pouvez insérer le nouveau livre
                                     bookDao.insert(book);
                                     BookListActivity.favoriteList.getBooks().add(book);
-                                    Log.i("Insert DAO BOOk", book.getTitle());
                                 }
                                 return bookDao.getAllBooks();
                             }
 
                             @Override
                             protected void onPostExecute(List<Book> books) {
-                                Log.i("Liste DAO books", Integer.toString(books.size()));
                             }
                         }.execute();
                     } else {
