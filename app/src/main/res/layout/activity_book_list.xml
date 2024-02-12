@@ -31,7 +31,7 @@
         app:layout_constraintTop_toBottomOf="@+id/tvTitleApp" />
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rvYourList"
+        android:id="@+id/rvRandomList"
         android:layout_width="401dp"
         android:layout_height="140dp"
         android:layout_marginTop="24dp"
@@ -51,7 +51,7 @@
         android:textSize="18sp"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/rvYourList" />
+        app:layout_constraintTop_toBottomOf="@+id/rvRandomList" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rvNewBooks"

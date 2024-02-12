@@ -67,12 +67,11 @@ public class SearchActivity extends AppCompatActivity {
     }
 
     private void performSearch() {
-        //String searchQuery = searchView.getQuery().toString();
         String searchQuery = searchEditText.getText().toString();
 
         if (!TextUtils.isEmpty(searchQuery)) {
             GetRequest getRequest = new GetRequest();
-            getRequest.retrBooks(searchQuery, 99, new BookGetRequestCallback() {
+            getRequest.retrBooks(searchQuery, 35, new BookGetRequestCallback() {
                 @Override
                 public void onSuccess(List<Book> books) {
                     searchList = new BookData(books);

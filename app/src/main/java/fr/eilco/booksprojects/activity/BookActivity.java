@@ -3,6 +3,8 @@ package fr.eilco.booksprojects.activity;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.annotation.SuppressLint;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.AsyncTask;
@@ -48,8 +50,8 @@ public class BookActivity extends AppCompatActivity {
                     book = BookListActivity.newList.getBookByKey(keyBook);
                 }else if(bookListName.equals("FavoriteList")){
                     book = BookListActivity.favoriteList.getBookByKey(keyBook);
-                }else if(bookListName.equals("YourList")){
-                    book = BookListActivity.yourList.getBookByKey(keyBook);
+                }else if(bookListName.equals("RandomList")){
+                    book = BookListActivity.randomList.getBookByKey(keyBook);
                 } else {
                     book = SearchActivity.searchList.getBookByKey(keyBook);
                 }
@@ -81,11 +83,26 @@ public class BookActivity extends AppCompatActivity {
 
 
                 tvAuthorName.setOnClickListener(view -> {
-                    Intent newIntent = new Intent(BookActivity.this, AuthorActivity.class);
                     String authorKey = book.getAuthorKey();
-                    newIntent.putExtra("AUTHOR_KEY", authorKey);
-                    startActivity(newIntent);
+                    if (authorKey != null) {
+                        Intent newIntent = new Intent(BookActivity.this, AuthorActivity.class);
+                        newIntent.putExtra("AUTHOR_KEY", authorKey);
+                        startActivity(newIntent);
+                    } else {
+                        // Afficher un message d'alerte si authorKey est nulle
+                        AlertDialog.Builder builder = new AlertDialog.Builder(BookActivity.this);
+                        builder.setMessage("Erreur de recuperation des données de l'auteur !");
+                        builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                dialog.dismiss();
+                            }
+                        });
+                        AlertDialog dialog = builder.create();
+                        dialog.show();
+                    }
                 });
+
 
                 starImage.setOnClickListener(view -> {
                     boolean isStared = !book.isStar();
@@ -140,13 +157,8 @@ public class BookActivity extends AppCompatActivity {
 
                     if (bookLink != null && !bookLink.isEmpty()) {
                         Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(bookLink));
-                        browserIntent.setPackage("com.android.chrome");
+                        //.setPackage("com.android.chrome");
                         startActivity(browserIntent);
-                        if (browserIntent.resolveActivity(getPackageManager()) != null) {
-                            startActivity(browserIntent);
-                        } else {
-                            Toast.makeText(BookActivity.this, "Aucune application de navigation disponible", Toast.LENGTH_SHORT).show();
-                        }
                     } else {
                         Toast.makeText(BookActivity.this, "Aucun lien disponible pour ce livre", Toast.LENGTH_SHORT).show();
                     }

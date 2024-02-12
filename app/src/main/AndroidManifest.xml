@@ -25,9 +25,6 @@
             android:exported="false" />
         <activity
             android:name="fr.eilco.booksprojects.activity.BookListActivity"
-            android:exported="false" />
-        <activity
-            android:name="fr.eilco.booksprojects.activity.SplashActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

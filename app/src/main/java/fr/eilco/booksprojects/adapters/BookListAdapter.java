@@ -1,5 +1,7 @@
 package fr.eilco.booksprojects.adapters;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.view.LayoutInflater;
@@ -65,12 +67,27 @@ public class BookListAdapter extends RecyclerView.Adapter<BookListAdapter.BookVi
                     int position = holder.getAdapterPosition();
                     if (position != RecyclerView.NO_POSITION) {
                         String keyBook = book.getKey();
-                        // Ouvrir une nouvelle activité en transmettant les données du livre
-                        Intent intent = new Intent(view.getContext(), BookActivity.class);
-                        intent.putExtra("BOOK_KEY", keyBook);
-                        intent.putExtra("BookListName",listName);
-                        view.getContext().startActivity(intent);
+                        if (keyBook != null) { // Vérifier si keyBook n'est pas nulle
+                            // Ouvrir une nouvelle activité en transmettant les données du livre
+                            Intent intent = new Intent(view.getContext(), BookActivity.class);
+                            intent.putExtra("BOOK_KEY", keyBook);
+                            intent.putExtra("BookListName", listName);
+                            view.getContext().startActivity(intent);
+                        } else {
+                            // Afficher un message d'alerte si keyBook est nulle
+                            AlertDialog.Builder builder = new AlertDialog.Builder(view.getContext());
+                            builder.setMessage("Erreur sur les informartions du livre !");
+                            builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog, int which) {
+                                    dialog.dismiss();
+                                }
+                            });
+                            AlertDialog dialog = builder.create();
+                            dialog.show();
+                        }
                     }
+
                 }
             });
         }

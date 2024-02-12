@@ -31,14 +31,14 @@ import fr.eilco.booksprojects.serverOperations.callback.ImageBookGetRequestCallb
 
 public class BookListActivity extends AppCompatActivity {
 
-    private RecyclerView rvYourList;
+    private RecyclerView rvRandomList;
     private RecyclerView rvNewBooks;
     private RecyclerView rvFavorite;
     private int cardViewId = R.layout.view_book_card;
-    private BookListAdapter adapterYourList;
+    private BookListAdapter adapterRandomList;
     private BookListAdapter adapterNewList;
     private BookListAdapter adapterFavorite;
-    public static BookData yourList;
+    public static BookData randomList;
     public static BookData newList;
 
     public static BookData favoriteList;
@@ -63,7 +63,7 @@ public class BookListActivity extends AppCompatActivity {
         GetRequest getRequest = new GetRequest();
         GetRequest getRequest2 = new GetRequest();
 
-        rvYourList = findViewById(R.id.rvYourList);
+        rvRandomList = findViewById(R.id.rvRandomList);
         rvNewBooks = findViewById(R.id.rvNewBooks);
         rvFavorite = findViewById(R.id.rvFavorites);
 
@@ -101,20 +101,20 @@ public class BookListActivity extends AppCompatActivity {
                 Log.i("DEBUG", "LIST BOOK HARRY POTTER : Livres récupérés avec succès");
                 Log.i("DEBUG","Taille livre " + Integer.toString(books.size()));
 
-                yourList = new BookData(books);
-                adapterYourList = new BookListAdapter(cardViewId, new ArrayList<>(books),"YourList");
+                randomList = new BookData(books);
+                adapterRandomList = new BookListAdapter(cardViewId, new ArrayList<>(books),"RandomList");
 
-                rvYourList.setLayoutManager(new LinearLayoutManager(BookListActivity.this, LinearLayoutManager.HORIZONTAL, false));
-                rvYourList.setAdapter(adapterYourList);
+                rvRandomList.setLayoutManager(new LinearLayoutManager(BookListActivity.this, LinearLayoutManager.HORIZONTAL, false));
+                rvRandomList.setAdapter(adapterRandomList);
 
-                for (Book bookItem:yourList.getBooks()) {
+                for (Book bookItem:randomList.getBooks()) {
                     Log.d("DEBUG", "Je rentre dans la boucle" + books.toString());
                     GetRequest getRequestImage = new GetRequest();
                     getRequestImage.retrBookImage(bookItem, new ImageBookGetRequestCallback() {
                         @Override
                         public void onSuccess(Bitmap image) {
                             Log.d("DEBUG","OnSuccees ImageBOOK "+bookItem.toString());
-                            rvYourList.setAdapter(adapterYourList);
+                            rvRandomList.setAdapter(adapterRandomList);
                         }
 
                         @Override
